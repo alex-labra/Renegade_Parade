@@ -3,4 +3,5 @@
     <string name="settings_bottom">Settings</string>
     <string name="play_bottom">Play Match</string>
     <string name="stats_bottom">Stats</string>
+    <string name="back_bottom">Back</string>
 </resources>

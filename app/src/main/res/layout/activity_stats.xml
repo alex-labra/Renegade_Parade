@@ -8,18 +8,26 @@
 
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="312dp"
+        android:layout_height="86dp"
         android:text="@string/stats_bottom"
-        tools:layout_editor_absoluteX="315dp"
-        tools:layout_editor_absoluteY="178dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.467"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintVertical_bias="0.541" />
 
-
-
+    <Button
+        android:layout_width="266dp"
+        android:layout_height="124dp"
+        android:alpha="0.40"
+        android:text="@string/back_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
