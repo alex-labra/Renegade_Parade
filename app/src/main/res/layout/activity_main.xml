@@ -34,6 +34,7 @@
         />
 
     <Button
+        android:id="@+id/statsbutton"
         android:layout_width="106dp"
         android:layout_height="wrap_content"
         android:alpha="0.40"
