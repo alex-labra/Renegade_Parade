@@ -7,9 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     tools:context=".MainActivity"
-    android:background="@drawable/download"
+    android:background="@drawable/mainscreen"
     >
-
     <Button
         android:id="@+id/settingsbutton"
         android:layout_width="106dp"
