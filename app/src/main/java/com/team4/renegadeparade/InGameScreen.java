@@ -3,6 +3,7 @@ package com.team4.renegadeparade;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,10 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
         reloadButton.setOnClickListener(v -> reload(v));
         disconnectButton = findViewById(R.id.disconnectButton);
         disconnectButton.setOnClickListener(v -> disconnect(v));
+
+        //fullscreen
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     private void shoot(View view) {}

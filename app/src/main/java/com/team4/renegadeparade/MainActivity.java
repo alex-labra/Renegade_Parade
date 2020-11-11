@@ -12,6 +12,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
     private Button statsbutton;
     private Button playbutton;
+    private Button sButton;
     //test test
 
     @Override
@@ -33,10 +34,20 @@ public class MainActivity extends AppCompatActivity {
         statsbutton = findViewById(R.id.statsbutton);
         statsbutton.setOnClickListener(v -> openStats());
 
+        //Settings Button
+        sButton = (Button) findViewById(R.id.settingsbutton);
+        sButton.setOnClickListener(v -> openSettingsActivity());
+
+
         //Play button
         playbutton = findViewById(R.id.playbutton);
         playbutton.setOnClickListener(v -> startMatch());
+
+        Intent intent =  new Intent(MainActivity.this, BackgroundSoundService.class);
+        startService(intent);
     }
+
+
 
     private void openStats() {
         Intent intent = new Intent(this, Stats.class);
@@ -47,4 +58,17 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, InGameScreen.class);
         startActivity(intent);
     }
+
+    public void openSettingsActivity()
+    {
+        Intent intent2 = new Intent(this, SettingsActivity.class);
+        startActivity(intent2);
+    }
+
+   /* public void PlayBackgroundSound(View view){
+        Intent intent =  new Intent(MainActivity.this, BackgroundSoundService.class);
+        startService(intent);
+    }*/
+
+
 }
