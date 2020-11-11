@@ -9,8 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.RenegadeParade">
-        <activity android:name=".Stats"></activity>
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".Stats"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".InGameScreen"
+            android:screenOrientation="landscape" />
+        <activity android:name=".MainActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -6,12 +6,12 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    private Button button;
+    private Button statsbutton;
+    private Button playbutton;
     //test test
 
     @Override
@@ -30,17 +30,21 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         //Stats Button
-        button = (Button) findViewById(R.id.statsbutton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openStats();
-            }
-        });
+        statsbutton = findViewById(R.id.statsbutton);
+        statsbutton.setOnClickListener(v -> openStats());
+
+        //Play button
+        playbutton = findViewById(R.id.playbutton);
+        playbutton.setOnClickListener(v -> startMatch());
     }
 
-    public void openStats() {
+    private void openStats() {
         Intent intent = new Intent(this, Stats.class);
+        startActivity(intent);
+    }
+    private void startMatch()
+    {
+        Intent intent = new Intent(this, InGameScreen.class);
         startActivity(intent);
     }
 }
