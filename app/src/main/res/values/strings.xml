@@ -2,8 +2,10 @@
     <string name="app_name">Renegade Parade</string>
     <string name="settings_bottom">Settings</string>
     <string name="play_bottom">Play Match</string>
-    <string name="stats_bottom">Stats</string>
-    <string name="back_bottom">Back</string>
+    <string name="Stats_bottom">Stats</string>
+    <string name="Stats_back">Back</string>
+    <string name="Stats_page">Stats</string>
+    <string name="Stats_progress">99%</string>
     <string name="Settings_Page">Settings</string>
     <string name="settings_back">Back</string>
     <string name="settings_username">Input Username Here</string>
