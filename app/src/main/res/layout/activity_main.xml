@@ -9,6 +9,7 @@
     >
 
     <Button
+        android:id="@+id/settingsbutton"
         android:layout_width="106dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="624dp"
@@ -19,7 +20,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        />
 
     <Button
         android:layout_width="wrap_content"
@@ -33,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <Button
+         <Button
         android:id="@+id/statsbutton"
         android:layout_width="106dp"
         android:layout_height="wrap_content"
@@ -56,5 +58,14 @@
         app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintVertical_bias="0.976"
+        />
+    <Button
+        android:onClick="PlayBackgroundSound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Run background Sound"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

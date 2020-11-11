@@ -9,14 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.RenegadeParade">
-        <activity android:name=".Stats"></activity>
+        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".Stats" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".BackgroundSoundService"/>
     </application>
 
 </manifest>

@@ -4,4 +4,9 @@
     <string name="play_bottom">Play Match</string>
     <string name="stats_bottom">Stats</string>
     <string name="back_bottom">Back</string>
+    <string name="Settings_Page">Settings</string>
+    <string name="settings_back">Back</string>
+    <string name="settings_username">Input Username Here</string>
+    <string name="settings_unmute">Unmute</string>
+    <string name="settings_mute">Mute</string>
 </resources>
