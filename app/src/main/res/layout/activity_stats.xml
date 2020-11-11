@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     tools:context=".Stats"
-    android:background ="@drawable/download">
+    android:background ="@drawable/background">
 
 
     <Button
