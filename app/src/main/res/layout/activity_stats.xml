@@ -72,7 +72,6 @@
         android:layout_width="143dp"
         android:layout_height="92dp"
         android:indeterminateDrawable="@drawable/progress"
-        app:layout_constrain="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.966"

@@ -1,6 +1,8 @@
 package com.team4.renegadeparade;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -10,10 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class InGameScreen extends AppCompatActivity implements JoystickView.JoystickListener
 {
-    Button shootButton;
-    Button useButton;
-    Button reloadButton;
-    Button disconnectButton;
+    private Button shootButton;
+    private Button useButton;
+    private Button reloadButton;
+    private Button disconnectButton;
+    private Canvas mCanvas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,7 +42,11 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
     private void shoot(View view) {}
     private void use(View view) {}
     private void reload(View view) {}
-    private void disconnect(View view) {}
+    private void disconnect(View view)
+    {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public void onJoystickMoved(float xPercent, float yPercent, int id)
