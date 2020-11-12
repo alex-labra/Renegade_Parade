@@ -7,9 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     tools:context=".MainActivity"
-    android:background="@drawable/download"
+    android:background="@drawable/mainscreen"
     >
-
     <Button
         android:id="@+id/settingsbutton"
         android:layout_width="106dp"
@@ -43,7 +42,7 @@
         android:layout_width="106dp"
         android:layout_height="wrap_content"
         android:alpha="0.40"
-        android:text="@string/stats_bottom"
+        android:text="@string/Stats_bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
