@@ -2,13 +2,20 @@ package com.team4.renegadeparade;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+/*
+    Class created by Nathan
+ */
 
 public class InGameScreen extends AppCompatActivity implements JoystickView.JoystickListener
 {
@@ -16,13 +23,14 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
     private Button useButton;
     private Button reloadButton;
     private Button disconnectButton;
-    private Canvas mCanvas;
-
+    private JoystickView joystick;
+    private GameView gameView;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        JoystickView joystick = new JoystickView(this);
+        joystick = new JoystickView(this);
+        gameView = new GameView(this);
         setContentView(R.layout.activity_game);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         shootButton = findViewById(R.id.shootButton);
@@ -33,10 +41,9 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
         reloadButton.setOnClickListener(v -> reload(v));
         disconnectButton = findViewById(R.id.disconnectButton);
         disconnectButton.setOnClickListener(v -> disconnect(v));
-
-        //fullscreen
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
     }
 
     private void shoot(View view) {}
@@ -51,6 +58,7 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
     @Override
     public void onJoystickMoved(float xPercent, float yPercent, int id)
     {
-
+        System.out.println("X: " + xPercent + " Y: " + yPercent);
+        //gameView.drawGame(xPercent, yPercent);
     }
 }

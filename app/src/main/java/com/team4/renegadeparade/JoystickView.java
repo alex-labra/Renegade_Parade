@@ -14,6 +14,11 @@ import android.view.View;
 
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Created by Daniel on 7/25/2016.
+ * https://github.com/efficientisoceles/JoystickView
+ */
+
 public class JoystickView extends SurfaceView implements SurfaceHolder.Callback, View.OnTouchListener
 {
     private float centerX;
@@ -108,7 +113,7 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
     public void surfaceDestroyed(SurfaceHolder holder) {}
 
     @Override
-    public boolean onTouch(@org.jetbrains.annotations.NotNull View v, MotionEvent e)
+    public boolean onTouch(View v, MotionEvent e)
     {
         if(v.equals(this))
         {

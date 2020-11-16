@@ -19,9 +19,11 @@ public class Stats extends AppCompatActivity {
         //fullscreen
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //Back button by Nathan
         backButton = findViewById(R.id.Stats_back);
         backButton.setOnClickListener(v -> back());
     }
+    //Back method by Nathan
     private void back()
     {
         Intent intent = new Intent(this, MainActivity.class);

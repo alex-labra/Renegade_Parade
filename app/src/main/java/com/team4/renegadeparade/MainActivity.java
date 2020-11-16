@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         sButton.setOnClickListener(v -> openSettingsActivity());
 
 
-        //Play button
+        //Play button by Nathan
         playbutton = findViewById(R.id.playbutton);
         playbutton.setOnClickListener(v -> startMatch());
 

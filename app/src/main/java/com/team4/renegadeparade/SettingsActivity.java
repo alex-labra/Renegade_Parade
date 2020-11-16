@@ -24,11 +24,12 @@ public class SettingsActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        //Back button by Nathan
         backButton = findViewById(R.id.settings_back);
         backButton.setOnClickListener(v -> back());
 
     }
-
+    //Back method by Nathan
     private void back()
     {
         Intent intent = new Intent(this, MainActivity.class);
