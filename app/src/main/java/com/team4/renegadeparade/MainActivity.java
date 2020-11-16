@@ -13,21 +13,19 @@ public class MainActivity extends AppCompatActivity {
     private Button statsbutton;
     private Button playbutton;
     private Button sButton;
-    //test test
 
-    @Override
+    @Override //by alex
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //reads app layout and design
+        //reads app layout and design by alex
         setContentView(R.layout.activity_main);
 
-        //fullscreen
+        //fullscreen by alex
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
-        //screen landscape orientation on request
+        //screen landscape orientation on request by alex
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         //Stats Button
@@ -65,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent2);
     }
 
-   /* public void PlayBackgroundSound(View view){
+   /* //code up for review, next phase
+   public void PlayBackgroundSound(View view){
         Intent intent =  new Intent(MainActivity.this, BackgroundSoundService.class);
         startService(intent);
     }*/
