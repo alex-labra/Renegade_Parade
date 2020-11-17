@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.media.MediaPlayer;
 import android.view.View;
-
+//Settings class done by Rey
 public class SettingsActivity extends AppCompatActivity {
     MediaPlayer player;
     Button backButton;

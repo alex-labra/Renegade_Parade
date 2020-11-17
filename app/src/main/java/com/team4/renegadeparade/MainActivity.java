@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         statsbutton = findViewById(R.id.statsbutton);
         statsbutton.setOnClickListener(v -> openStats());
 
-        //Settings Button
+        //Settings Button by Rey
         sButton = (Button) findViewById(R.id.settingsbutton);
         sButton.setOnClickListener(v -> openSettingsActivity());
 
