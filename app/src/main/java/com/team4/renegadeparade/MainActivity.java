@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         //screen landscape orientation on request by alex
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        //Stats Button
+        //Stats Button by zayn
         statsbutton = findViewById(R.id.statsbutton);
         statsbutton.setOnClickListener(v -> openStats());
 
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+        // zayn
     private void openStats() {
         Intent intent = new Intent(this, Stats.class);
         startActivity(intent);
