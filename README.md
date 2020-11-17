@@ -5,3 +5,5 @@ Necessary Downloads to run project
 - Download the Google Pixel Emulator 
   - can download in Android Studio
   - uses Android 9
+  
+  By Rey
