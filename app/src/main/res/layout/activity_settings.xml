@@ -6,13 +6,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".SettingsActivity"
-    android:background="@drawable/background"
+    android:background="@drawable/background">
 
    <!-- by rey /-->
 
 
 
-    >
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

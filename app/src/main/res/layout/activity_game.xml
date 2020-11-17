@@ -8,7 +8,9 @@
     android:orientation="horizontal"
     tools:context=".InGameScreen"
     >
-
+    <!-- <
+            Made by Nathan
+            /-->
     <com.team4.renegadeparade.GameView
         android:id="@+id/gameView"
         android:layout_width="728dp"
