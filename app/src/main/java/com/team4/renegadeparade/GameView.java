@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -23,9 +24,10 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
     //thread by Alex
     private Thread thread;
     private boolean activePlay;
-    private float ratioX, ratioY;
+    public static float ratioX, ratioY;
     private int screenX, screenY;
     private Paint paint;
+    private GameCharacter gameCharacter;
     private Background background1, background2;
 
     int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
@@ -51,6 +53,8 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
 
         background1 = new Background(screenX, screenY, getResources());
         background2 = new Background(screenX, screenY, getResources());
+
+        gameCharacter = new GameCharacter(screenY, getResources());
 
         background2.x = screenX;
 
@@ -143,6 +147,9 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
             canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
             canvas.drawBitmap(background2.background, background2.x, background2.y, paint);
 
+            //drawing character
+            canvas.drawBitmap(gameCharacter.getGameCharacter(), gameCharacter.x, gameCharacter.y, paint);
+
             getHolder().unlockCanvasAndPost(canvas); //show moving background
 
         }
@@ -178,6 +185,14 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
 
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        //character movement can be implemented here
+
+        return true;
+
+    }
 }
 
 
