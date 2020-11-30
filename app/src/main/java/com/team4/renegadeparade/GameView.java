@@ -15,6 +15,9 @@ import android.view.SurfaceView;
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
     Class created by Nathan
  */
@@ -29,6 +32,7 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
     private Paint paint;
     private GameCharacter gameCharacter;
     private Background background1, background2;
+    private List<Pellet> pellets;
 
     int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
     int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
@@ -54,7 +58,9 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
         background1 = new Background(screenX, screenY, getResources());
         background2 = new Background(screenX, screenY, getResources());
 
-        gameCharacter = new GameCharacter(screenY, getResources());
+        gameCharacter = new GameCharacter(this, screenY, getResources());
+
+        pellets = new ArrayList<>();
 
         background2.x = screenX;
 
@@ -121,8 +127,8 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
     //by alex
     private void update()   {
 
-        background1.x -= 10 * ratioX; //moving on x-axis change to y to move on y-axis
-        background2.x -= 10 * ratioX; //both regulate background speed
+        background1.x -= 6 * ratioX; //moving on x-axis change to y to move on y-axis
+        background2.x -= 6 * ratioX; //both regulate background speed
 
         if(background1.x + background1.background.getWidth() < 0) {
 
@@ -135,6 +141,19 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
             background2.x = screenX;
 
         }
+
+        List<Pellet> offScreenPellet = new ArrayList<>();
+        for(Pellet pellet : pellets) {
+
+            if(pellet.x > screenX)
+                offScreenPellet.add(pellet);
+
+            pellet.x += 60 * ratioX; //manage speed of pellet
+
+        }
+
+        for(Pellet pellet : offScreenPellet)
+            pellets.remove(pellet);
 
     }
 
@@ -150,6 +169,9 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
             //drawing character
             canvas.drawBitmap(gameCharacter.getGameCharacter(), gameCharacter.x, gameCharacter.y, paint);
 
+            for(Pellet pellet: pellets)
+                canvas.drawBitmap(pellet.pellet, pellet.x, pellet.y, paint);
+
             getHolder().unlockCanvasAndPost(canvas); //show moving background
 
         }
@@ -158,7 +180,7 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
     //by alex
     private void sleep()   {
         try {
-            Thread.sleep(15);
+            Thread.sleep(5);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -189,8 +211,20 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
     public boolean onTouchEvent(MotionEvent event) {
 
         //character movement can be implemented here
+            if(event.getX() <= screenX) {
+                gameCharacter.fire++;
+            }
 
         return true;
+
+    }
+
+    public void newPellet() {
+
+    Pellet pellet = new Pellet(getResources());
+    pellet.x = gameCharacter.x + gameCharacter.width;
+    pellet.y = gameCharacter.y + (gameCharacter.height / 8);
+    pellets.add(pellet);
 
     }
 }

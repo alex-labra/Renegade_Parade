@@ -9,10 +9,17 @@ import static com.team4.renegadeparade.GameView.ratioY;
 
 public class GameCharacter {
 
-    int x, y, width, height, characterCount = 0;
-    Bitmap character1, character2, character3;
+    int fire = 0;
+    int x, y, width, height, characterCount = 0, fireCount = 1;
+    Bitmap fire1, fire2, fire3, character1, character2, character3;
+    private GameView gameView;
 
-    GameCharacter(int screenY, Resources res)   {
+    GameCharacter(GameView gameView, int screenY, Resources res)   {
+        this.gameView = gameView;
+
+        fire1 = BitmapFactory.decodeResource(res, R.drawable.fire);
+        fire2 = BitmapFactory.decodeResource(res, R.drawable.fire2);
+        fire3 = BitmapFactory.decodeResource(res, R.drawable.fire3);
 
         character1 = BitmapFactory.decodeResource(res, R.drawable.character2);
         character2 = BitmapFactory.decodeResource(res, R.drawable.character3);
@@ -27,6 +34,10 @@ public class GameCharacter {
         width *= (int) ratioX;
         height *= (int) ratioY;
 
+        fire1 = Bitmap.createScaledBitmap(fire1, width, height, false);
+        fire2 = Bitmap.createScaledBitmap(fire2, width, height, false);
+        fire3 = Bitmap.createScaledBitmap(fire3, width, height, false);
+
         character1 = Bitmap.createScaledBitmap(character1, width, height, false);
         character2 = Bitmap.createScaledBitmap(character2, width, height, false);
         character3 = Bitmap.createScaledBitmap(character3, width, height, false);
@@ -37,6 +48,25 @@ public class GameCharacter {
     }
 
     Bitmap getGameCharacter()   {
+
+        if(fire != 0)   {
+
+            if(fireCount == 1)  {
+                fireCount++;
+                return fire1;
+            }
+
+            if(fireCount == 2)  {
+                fireCount++;
+                return fire2;
+            }
+
+            fireCount = 1;
+            fire = 0;
+            gameView.newPellet();
+
+            return fire3;
+        }
 
         if(characterCount == 0) {
             characterCount++;
