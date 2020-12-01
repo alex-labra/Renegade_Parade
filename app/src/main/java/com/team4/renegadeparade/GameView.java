@@ -17,6 +17,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /*
     Class created by Nathan
@@ -26,13 +27,15 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
 {
     //thread by Alex
     private Thread thread;
-    private boolean activePlay;
+    private boolean activePlay, gameOver = false;
     public static float ratioX, ratioY;
     private int screenX, screenY;
     private Paint paint;
     private GameCharacter gameCharacter;
     private Background background1, background2;
     private List<Pellet> pellets;
+    private Enemy[] enemies;
+    private Random random;
 
     int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
     int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
@@ -61,6 +64,16 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
         gameCharacter = new GameCharacter(this, screenY, getResources());
 
         pellets = new ArrayList<>();
+
+        enemies = new Enemy[3];
+        for(int i = 0; i < 3; i++)  {
+
+            Enemy enemy = new Enemy(getResources());
+            enemies[i] = enemy;
+
+        }
+
+        random = new Random();
 
         background2.x = screenX;
 
@@ -150,10 +163,60 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
 
             pellet.x += 60 * ratioX; //manage speed of pellet
 
+            for (Enemy enemy : enemies) {
+
+                if(Rect.intersects(enemy.getCollisionShape(), pellet.getCollisionShape()))  {
+
+                    enemy.x = - 2000;
+                    pellet.x = screenX + 2000;
+                    enemy.dead = true;
+
+                }
+            }
+
         }
 
-        for(Pellet pellet : offScreenPellet)
+        for(Pellet pellet : offScreenPellet) {
+
             pellets.remove(pellet);
+
+        }
+
+        for(Enemy enemy : enemies)  {
+
+            enemy.x -= enemy.speed;
+
+            if(enemy.x + enemy.width < 0)   {
+
+                if(!enemy.dead) {
+
+                    gameOver = true;
+                    return;
+                }
+
+                int topRandomSpeed = (int) (35 * ratioX);
+                enemy.speed = random.nextInt(topRandomSpeed);
+
+                if(enemy.speed <= 7 *ratioX) {
+
+                    enemy.speed = (int) (8 * ratioY);
+
+                }
+
+                enemy.x = screenX;
+                enemy.y = random.nextInt(screenY - enemy.height);
+
+                enemy.dead = false;
+
+            }
+
+            if(Rect.intersects(enemy.getCollisionShape(), gameCharacter.getCollisionShape()))   {
+
+                gameOver = true;
+                return;
+
+            }
+        }
 
     }
 
@@ -166,11 +229,31 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
             canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
             canvas.drawBitmap(background2.background, background2.x, background2.y, paint);
 
+            if(gameOver)    {
+
+                activePlay = false;
+                canvas.drawBitmap(gameCharacter.getDeadCharacter(), gameCharacter.x, gameCharacter.y, paint);
+                getHolder().unlockCanvasAndPost(canvas);
+                return;
+
+            }
+
             //drawing character
             canvas.drawBitmap(gameCharacter.getGameCharacter(), gameCharacter.x, gameCharacter.y, paint);
 
-            for(Pellet pellet: pellets)
+            //draw pellet loop
+            for(Pellet pellet: pellets) {
+
                 canvas.drawBitmap(pellet.pellet, pellet.x, pellet.y, paint);
+
+            }
+
+            //draw enemies
+            for(Enemy enemy : enemies)  {
+
+                canvas.drawBitmap(enemy.getEnemy(), enemy.x, enemy.y, paint);
+
+            }
 
             getHolder().unlockCanvasAndPost(canvas); //show moving background
 

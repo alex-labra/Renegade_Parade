@@ -3,6 +3,7 @@ package com.team4.renegadeparade;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 
 import static com.team4.renegadeparade.GameView.ratioX;
 import static com.team4.renegadeparade.GameView.ratioY;
@@ -11,7 +12,7 @@ public class GameCharacter {
 
     int fire = 0;
     int x, y, width, height, characterCount = 0, fireCount = 1;
-    Bitmap fire1, fire2, fire3, character1, character2, character3;
+    Bitmap fire1, fire2, fire3, character1, character2, character3, deadCharacter;
     private GameView gameView;
 
     GameCharacter(GameView gameView, int screenY, Resources res)   {
@@ -24,6 +25,8 @@ public class GameCharacter {
         character1 = BitmapFactory.decodeResource(res, R.drawable.character2);
         character2 = BitmapFactory.decodeResource(res, R.drawable.character3);
         character3 = BitmapFactory.decodeResource(res, R.drawable.character4);
+
+        deadCharacter = BitmapFactory.decodeResource(res, R.drawable.deadcharacter);
 
         width = character1.getWidth();
         height = character1.getHeight();
@@ -41,6 +44,9 @@ public class GameCharacter {
         character1 = Bitmap.createScaledBitmap(character1, width, height, false);
         character2 = Bitmap.createScaledBitmap(character2, width, height, false);
         character3 = Bitmap.createScaledBitmap(character3, width, height, false);
+
+        deadCharacter = Bitmap.createScaledBitmap(deadCharacter, width, height, false);
+
 
         y = screenY / 2;
         x = (int)   (60 * ratioX);
@@ -81,6 +87,18 @@ public class GameCharacter {
         characterCount -= 2;
 
         return character3;
+
+    }
+
+    Rect getCollisionShape()    {
+
+        return new Rect(x, y, x + width, y + height);
+
+    }
+
+    Bitmap getDeadCharacter()   {
+
+        return deadCharacter;
 
     }
 
