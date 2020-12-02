@@ -36,6 +36,7 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
     private List<Pellet> pellets;
     private Enemy[] enemies;
     private Random random;
+    private boolean isTouching;
 
     int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
     int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
@@ -294,12 +295,26 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
     public boolean onTouchEvent(MotionEvent event) {
 
         //character movement can be implemented here
-            if(event.getX() <= screenX) {
-                gameCharacter.fire++;
+        if (event.getAction() == MotionEvent.ACTION_DOWN)
+        {
+            if (event.getX() >= gameCharacter.x && event.getX() < (gameCharacter.x + gameCharacter.character1.getWidth())
+                    && event.getY() >= gameCharacter.y && event.getY() < (gameCharacter.y + gameCharacter.character1.getHeight()))
+            {
+                isTouching = true;
             }
-
+        }
+        else if (event.getAction() == MotionEvent.ACTION_MOVE && isTouching)
+        {
+            gameCharacter.x = Math.round(event.getX()) - gameCharacter.character1.getWidth()/2;
+            gameCharacter.y = Math.round(event.getY()) - gameCharacter.character1.getHeight()/2;
+        }
+        else if (event.getAction() == MotionEvent.ACTION_UP)
+        {
+            isTouching = false;
+        }
+        if (!isTouching)
+            gameCharacter.fire++;
         return true;
-
     }
 
     public void newPellet() {
