@@ -190,12 +190,11 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
             if(enemy.x + enemy.width < 0)   {
 
                 if(!enemy.dead) {
-
                     gameOver = true;
                     return;
                 }
 
-                int topRandomSpeed = (int) (35 * ratioX);
+                int topRandomSpeed = (int) (6 * ratioX);
                 enemy.speed = random.nextInt(topRandomSpeed);
 
                 if(enemy.speed <= 7 *ratioX) {
@@ -244,9 +243,7 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
 
             //draw pellet loop
             for(Pellet pellet: pellets) {
-
                 canvas.drawBitmap(pellet.pellet, pellet.x, pellet.y, paint);
-
             }
 
             //draw enemies
@@ -255,11 +252,8 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
                 canvas.drawBitmap(enemy.getEnemy(), enemy.x, enemy.y, paint);
 
             }
-
             getHolder().unlockCanvasAndPost(canvas); //show moving background
-
         }
-
     }
     //by alex
     private void sleep()   {
@@ -317,13 +311,12 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
         return true;
     }
 
-    public void newPellet() {
-
-    Pellet pellet = new Pellet(getResources());
-    pellet.x = gameCharacter.x + gameCharacter.width;
-    pellet.y = gameCharacter.y + (gameCharacter.height / 8);
-    pellets.add(pellet);
-
+    public void newPellet()
+    {
+        Pellet pellet = new Pellet(getResources());
+        pellet.x = gameCharacter.x + gameCharacter.width;
+        pellet.y = gameCharacter.y + (gameCharacter.height / 8);
+        pellets.add(pellet);
     }
 }
 
