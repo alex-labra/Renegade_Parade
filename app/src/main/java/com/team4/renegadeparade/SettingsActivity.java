@@ -14,6 +14,8 @@ import android.view.View;
 public class SettingsActivity extends AppCompatActivity {
     MediaPlayer player;
     Button backButton;
+    Button mute;
+    Button unmute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,15 @@ public class SettingsActivity extends AppCompatActivity {
         backButton = findViewById(R.id.settings_back);
         backButton.setOnClickListener(v -> back());
 
+        //mute button by rey
+        mute = findViewById(R.id.mute);
+        mute.setOnClickListener(v -> muteMusic());
+
+        //unmute button by rey
+        unmute = findViewById(R.id.unmute);
+        unmute.setOnClickListener(v -> unmuteMusic());
+
+
     }
     //Back method by Nathan
     private void back()
@@ -36,5 +47,19 @@ public class SettingsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //Mute music method by Rey
+    private void muteMusic()
+    {
+        Intent intent = new Intent(this, BackgroundSoundService.class);
+        stopService(intent);
+    }
+
+    //Unmute music method by Rey
+    private void unmuteMusic()
+    {
+        Intent intent = new Intent(this, BackgroundSoundService.class);
+        startService(intent);
+
+    }
 
 }

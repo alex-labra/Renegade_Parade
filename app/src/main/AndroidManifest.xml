@@ -3,34 +3,37 @@
     package="com.team4.renegadeparade">
 
     <application
-
         android:allowBackup="true"
         android:icon="@drawable/background"
         android:label="@string/app_name"
         android:supportsRtl="false"
         android:theme="@style/Theme.RenegadeParade">
-        <!-- <
+        <!--
+         <
         comment by alex, app icon change above on next phase
         android:roundIcon="@mipmap/ic_launcher_round"
-        /-->
+        /
+        -->
         <activity
             android:name=".Stats"
             android:screenOrientation="landscape" />
         <activity
             android:name=".InGameScreen"
             android:screenOrientation="landscape" />
-        <activity android:name=".SettingsActivity"
+        <activity
+            android:name=".SettingsActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="landscape">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".BackgroundSoundService"/>
+
+        <service android:name=".BackgroundSoundService" />
     </application>
 
 </manifest>

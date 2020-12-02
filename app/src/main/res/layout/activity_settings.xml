@@ -8,7 +8,6 @@
     tools:context=".SettingsActivity"
     android:background="@drawable/background">
 
-   <!-- by rey /-->
 
 
 
@@ -55,8 +54,9 @@
         android:layout_height="wrap_content"
         android:text="@string/settings_mute"
         app:layout_constraintLeft_toRightOf="@id/unmute"
-        app:layout_constraintBottom_toBottomOf="parent
-"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+
         />
 
     <Button
@@ -66,6 +66,7 @@
         android:text="@string/settings_unmute"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

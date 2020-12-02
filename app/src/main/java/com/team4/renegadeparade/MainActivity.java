@@ -41,8 +41,12 @@ public class MainActivity extends AppCompatActivity {
         playbutton = findViewById(R.id.playbutton);
         playbutton.setOnClickListener(v -> startMatch());
 
+     /*
+        testing mute and unmute
         Intent intent =  new Intent(MainActivity.this, BackgroundSoundService.class);
         startService(intent);
+
+      */
     }
 
 
