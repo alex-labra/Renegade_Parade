@@ -16,6 +16,7 @@ public class SettingsActivity extends AppCompatActivity {
     Button backButton;
     Button mute;
     Button unmute;
+    public static boolean musicPlaying = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class SettingsActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, BackgroundSoundService.class);
         stopService(intent);
+        musicPlaying = false;
     }
 
     //Unmute music method by Rey
@@ -59,6 +61,8 @@ public class SettingsActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, BackgroundSoundService.class);
         startService(intent);
+        musicPlaying = true;
+
 
     }
 
