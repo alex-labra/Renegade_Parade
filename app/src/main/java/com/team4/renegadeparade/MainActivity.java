@@ -9,14 +9,20 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
+
 public class MainActivity extends AppCompatActivity {
     private Button statsbutton;
     private Button playbutton;
     private Button sButton;
+    public boolean musicplaying = true;
+
+
+
 
     @Override //by alex
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.musicplaying = musicplaying;
 
         //reads app layout and design by alex
         setContentView(R.layout.activity_main);
@@ -41,16 +47,23 @@ public class MainActivity extends AppCompatActivity {
         playbutton = findViewById(R.id.playbutton);
         playbutton.setOnClickListener(v -> startMatch());
 
-     /*
-        testing mute and unmute
-        Intent intent =  new Intent(MainActivity.this, BackgroundSoundService.class);
-        startService(intent);
 
-      */
+        if(SettingsActivity.musicPlaying == true)
+        {
+            Intent intent = new Intent(MainActivity.this, BackgroundSoundService.class);
+            startService(intent);
+        }
+        else{
+            Intent intent = new Intent(MainActivity.this, BackgroundSoundService.class);
+            stopService(intent);
+            }
+
     }
 
 
-        // zayn
+
+
+    // zayn
     private void openStats() {
         Intent intent = new Intent(this, Stats.class);
         startActivity(intent);
