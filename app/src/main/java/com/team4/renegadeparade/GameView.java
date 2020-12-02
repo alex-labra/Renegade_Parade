@@ -3,6 +3,7 @@ package com.team4.renegadeparade;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -37,6 +38,7 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
     private Enemy[] enemies;
     private Random random;
     private boolean isTouching;
+    private int score = 0;
 
     int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
     int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
@@ -229,6 +231,10 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
             Canvas canvas = getHolder().lockCanvas();
             canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
             canvas.drawBitmap(background2.background, background2.x, background2.y, paint);
+            //Drawing the score. by Zayn
+            paint.setColor(Color.argb(255,  249, 129, 0));
+            paint.setTextSize(40);
+                canvas.drawText("Score: " + score, 10,50, paint);
 
             if(gameOver)    {
 

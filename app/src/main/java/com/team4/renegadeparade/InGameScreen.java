@@ -88,4 +88,5 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
         super.onResume();
         gameView.start();
     }
+
 }
