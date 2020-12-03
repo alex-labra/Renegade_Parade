@@ -81,6 +81,8 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
         background2.x = screenX;
 
         paint = new Paint();
+
+        score = 0;
     }
     /*
     public GameView(Context context, AttributeSet attributes, int style)
@@ -173,7 +175,7 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
                     enemy.x = - 2000;
                     pellet.x = screenX + 2000;
                     enemy.dead = true;
-
+                    score++;
                 }
             }
 
@@ -240,8 +242,8 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
                 activePlay = false;
                 canvas.drawBitmap(gameCharacter.getDeadCharacter(), gameCharacter.x, gameCharacter.y, paint);
                 getHolder().unlockCanvasAndPost(canvas);
+                MainActivity.getInstance().highscoreManager.checkHighScore(score);
                 return;
-
             }
 
             //drawing character
