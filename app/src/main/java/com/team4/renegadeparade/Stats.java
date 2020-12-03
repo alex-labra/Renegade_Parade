@@ -7,8 +7,10 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class Stats extends AppCompatActivity {
+
     Button backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
