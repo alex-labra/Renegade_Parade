@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,73 +21,78 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class InGameScreen extends AppCompatActivity implements JoystickView.JoystickListener
 {
-    private Button shootButton;
-    private Button useButton;
-    private Button reloadButton;
-    private Button disconnectButton;
-    private JoystickView joystick;
-    private GameView gameView;
+    public TextView HighScore, yourScore, highScoreText, yourScoreText, gameOverText;
+    public Button btnRetry;
+    private static InGameScreen instance;
+    private int speed = 15;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        instance = this;
         //by alex
-        Point point = new Point();
-        getWindowManager().getDefaultDisplay().getSize(point);
 
-        gameView = new GameView(this, point.x, point.y);
-        joystick = new JoystickView(this);
+        setContentView(R.layout.activity_game); //display game background
 
-        setContentView(gameView); //display game background
-
-        //joystick = new JoystickView(this);
-        //gameView = new GameView(this);
-        //setContentView(R.layout.activity_game);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        //shootButton = findViewById(R.id.shootButton);
-        //shootButton.setOnClickListener(v -> shoot(v));
-        //useButton = findViewById(R.id.UseButton);
-        //useButton.setOnClickListener(v -> use(v));
-        //reloadButton = findViewById(R.id.reloadButton);
-        //reloadButton.setOnClickListener(v -> reload(v));
-        //disconnectButton = findViewById(R.id.disconnectButton);
-        //disconnectButton.setOnClickListener(v -> disconnect(v));
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        HighScore = (TextView) findViewById(R.id.HighScore);
+        highScoreText = findViewById(R.id.highScoreText);
+        yourScore = (TextView) findViewById(R.id.yourScore);
+        yourScoreText = findViewById(R.id.yourScoreText);
+        gameOverText = findViewById(R.id.gameOver);
+        btnRetry = (Button) findViewById(R.id.btnRetry);
+        btnRetry.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.getInstance(), MainActivity.class);
+            MainActivity.getInstance().startActivity(intent);
+        });
     }
-
-    //private void shoot(View view) {}
-    //private void use(View view) {}
-    //private void reload(View view) {}
-    //private void disconnect(View view)
-
-/*
-    {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
-*/
 
 
     @Override
     public void onJoystickMoved(float xPercent, float yPercent, int id)
     {
-        System.out.println("X: " + xPercent + " Y: " + yPercent);
-        //gameView.drawGame(xPercent, yPercent);
+        GameView.getInstance().gameCharacter.x+=(xPercent * speed);
+        GameView.getInstance().gameCharacter.y+=(yPercent * speed);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        gameView.stop();
+        if (GameView.getInstance() != null)
+            GameView.getInstance().stop();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        gameView.start();
+        if (GameView.getInstance() != null)
+            GameView.getInstance().start();
     }
-
+    public void showEnd()
+    {
+        this.runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run() {
+                gameOverText.bringToFront();
+                yourScoreText.bringToFront();
+                yourScore.bringToFront();
+                highScoreText.bringToFront();
+                HighScore.bringToFront();
+                btnRetry.bringToFront();
+                gameOverText.setVisibility(View.VISIBLE);
+                yourScoreText.setVisibility(View.VISIBLE);
+                yourScore.setVisibility(View.VISIBLE);
+                highScoreText.setVisibility(View.VISIBLE);
+                HighScore.setVisibility(View.VISIBLE);
+                btnRetry.setVisibility(View.VISIBLE);
+                JoystickView.getInstance().setVisibility(View.GONE);
+            }
+        });
+    }
+    public static InGameScreen getInstance()
+    {
+        return instance;
+    }
 }

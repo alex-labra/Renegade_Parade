@@ -21,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class JoystickView extends SurfaceView implements SurfaceHolder.Callback, View.OnTouchListener
 {
+    private static JoystickView instance;
     private float centerX;
     private float centerY;
     private float baseRadius;
@@ -30,6 +31,7 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
 
     private void setupDimensions()
     {
+        instance = this;
         centerX = getWidth() / 2f;
         centerY = getHeight() / 2f;
         baseRadius = Math.min(getWidth(), getHeight()) / 3f;
@@ -115,7 +117,7 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
     @Override
     public boolean onTouch(View v, MotionEvent e)
     {
-        if(v.equals(this))
+        if(v.equals(this) && GameView.getInstance().activePlay)
         {
             if(e.getAction() != MotionEvent.ACTION_UP)
             {
@@ -135,10 +137,22 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
                 }
             }
             else
+            {
                 drawJoystick(centerX, centerY);
-            joystickCallback.onJoystickMoved(0,0,getId());
+                joystickCallback.onJoystickMoved(0,0,getId());
+            }
         }
         return true;
+    }
+
+    public void centerJoystick()
+    {
+        drawJoystick(centerX, centerY);
+    }
+
+    public static JoystickView getInstance()
+    {
+        return instance;
     }
 
     public interface JoystickListener

@@ -20,7 +20,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <com.team4.renegadeparade.JoystickView
         android:id="@+id/joystick"
         android:layout_width="156dp"
@@ -35,44 +34,105 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.89" />
 
-    <Button
-        android:id="@+id/shootButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="25dp"
-        android:text="Shoot"
+    <TextView
+        android:id="@+id/gameOver"
+        android:layout_width="360dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="GAME OVER"
+        android:textColor="@color/red"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UseButton" />
-
-    <Button
-        android:id="@+id/reloadButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="22dp"
-        android:text="Reload"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shootButton" />
-
-    <Button
-        android:id="@+id/UseButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="201dp"
-        android:layout_marginEnd="25dp"
-        android:text="Use"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/disconnectButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="21dp"
-        android:text="Disconnect"
+        app:layout_constraintHorizontal_bias="0.636"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.045" />
+
+    <Button
+        android:id="@+id/btnRetry"
+        android:layout_width="143dp"
+        android:layout_height="88dp"
+        android:text="RETRY"
+        android:visibility="invisible"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:typeface="serif"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498" />
+
+    <TextView
+        android:id="@+id/yourScore"
+        android:layout_width="101dp"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:textColor="@color/red"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.769"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.474" />
+
+    <TextView
+        android:id="@+id/yourScoreText"
+        android:layout_width="138dp"
+        android:layout_height="93dp"
+        android:gravity="center"
+        android:text="YOUR SCORE"
+        android:textColor="@color/red"
+        android:textSize="30sp"
+        android:typeface="serif"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.772"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.238" />
+
+    <TextView
+        android:id="@+id/HighScore"
+        android:layout_width="101dp"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:textColor="@color/red"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.182"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.474" />
+
+    <TextView
+        android:id="@+id/highScoreText"
+        android:layout_width="138dp"
+        android:layout_height="93dp"
+        android:gravity="center"
+        android:text="TOP SCORE"
+        android:textColor="@color/red"
+        android:textSize="30sp"
+        android:typeface="serif"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.165"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.238" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

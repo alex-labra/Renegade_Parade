@@ -1,10 +1,12 @@
 package com.team4.renegadeparade;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -12,6 +14,9 @@ import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
@@ -24,20 +29,20 @@ import java.util.Random;
     Class created by Nathan
  */
 
-public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Callback
+public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runnable
 {
+    private static GameView instance;
     //thread by Alex
     private Thread thread;
-    private boolean activePlay, gameOver = false;
+    public boolean activePlay, gameOver = false;
     public static float ratioX, ratioY;
     private int screenX, screenY;
     private Paint paint;
-    private GameCharacter gameCharacter;
+    public GameCharacter gameCharacter;
     private Background background1, background2;
     private List<Pellet> pellets;
     private Enemy[] enemies;
     private Random random;
-    private boolean isTouching;
     private int score = 0;
 
     int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
@@ -48,15 +53,31 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
     //private Drawable mBackground;
 
     //added screen resolution by alex
-    public GameView(Context context, int screenX, int screenY) {
+    public GameView(Context context) {
         super(context);
-        //getHolder().addCallback(this);
-
+        getHolder().addCallback(this);
+        initialize();
+    }
+    public GameView(Context context, AttributeSet attributes, int style)
+    {
+        super(context, attributes, style);
+        getHolder().addCallback(this);
+        initialize();
+    }
+    public GameView(Context context, AttributeSet attributes)
+    {
+        super(context, attributes);
+        getHolder().addCallback(this);
+        initialize();
+    }
+    void initialize()
+    {
         //by alex
-        this.screenX = screenX;
-        this.screenY = screenY;
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
+        instance = this;
+        Point point = new Point();
+        MainActivity.getInstance().getWindowManager().getDefaultDisplay().getSize(point);
+        this.screenX = point.x;
+        this.screenY = point.y;
 
         ratioX = screenWidth / screenX; //screen ratio bug, should apply to all devices
         ratioY = screenHeight / screenY;
@@ -84,53 +105,6 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
 
         score = 0;
     }
-    /*
-    public GameView(Context context, AttributeSet attributes, int style)
-    {
-        super(context, attributes, style);
-        getHolder().addCallback(this);
-    }
-
-    public GameView(Context context, AttributeSet attributes)
-    {
-        super(context, attributes);
-        getHolder().addCallback(this);
-    }
-*/
-    /*
-    private void setupDimensions()
-    {
-        centerX = getWidth() / 2f;
-        centerY = getHeight() / 2f;
-    }
-
-     */
-/*
-    public void drawGame(float xPos, float yPos) {
-            Canvas canvas = this.getHolder().lockCanvas();
-            Rect imageBounds = canvas.getClipBounds();
-
-            mBackground.setBounds(imageBounds);
-            mBackground.draw(canvas);
-            canvas.translate(xPos, yPos);
-            getHolder().unlockCanvasAndPost(canvas);
-    }
-
- */
-/*
-    @Override
-    public void surfaceCreated(@NonNull SurfaceHolder holder) {
-            mBackground = ResourcesCompat.getDrawable(getResources(), R.drawable.background, null);
-            setupDimensions();
-            drawGame(centerX, centerY);
-    }
-
-    @Override
-    public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {}
-
-    @Override
-    public void surfaceDestroyed(@NonNull SurfaceHolder holder) {}
-*/
     @Override //by alex
     public void run() {
 
@@ -235,14 +209,17 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
             //Drawing the score. by Zayn
             paint.setColor(Color.argb(255,  249, 129, 0));
             paint.setTextSize(40);
-                canvas.drawText("Score: " + score, 10,50, paint);
+                canvas.drawText("Score: " + score, getWidth()/14,getHeight()/10, paint);
 
-            if(gameOver)    {
-
+            if(gameOver)
+            {
                 activePlay = false;
                 canvas.drawBitmap(gameCharacter.getDeadCharacter(), gameCharacter.x, gameCharacter.y, paint);
                 getHolder().unlockCanvasAndPost(canvas);
                 MainActivity.getInstance().highscoreManager.checkHighScore(score);
+                InGameScreen.getInstance().yourScore.setText(score + "");
+                InGameScreen.getInstance().HighScore.setText(MainActivity.getInstance().highscoreManager.getHighScore() + "");
+                InGameScreen.getInstance().showEnd();
                 return;
             }
 
@@ -273,30 +250,32 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
     }
 
     //by alex
-    public void start() {
-
-        activePlay = true;
-        thread = new Thread(this);
-        thread.start();
-
+    public void start()
+    {
+        if (thread == null || !thread.isAlive())
+        {
+            activePlay = true;
+            thread = new Thread(this);
+            thread.start();
+        }
     }
 
     //by alex
-    public void stop() {
-
+    public void stop()
+    {
         try {
             activePlay = false;
             thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        //character movement can be implemented here
+        gameCharacter.fire++;
+        /*
         if (event.getAction() == MotionEvent.ACTION_DOWN)
         {
             if (event.getX() >= gameCharacter.x && event.getX() < (gameCharacter.x + gameCharacter.character1.getWidth())
@@ -314,8 +293,7 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
         {
             isTouching = false;
         }
-        if (!isTouching)
-            gameCharacter.fire++;
+        if (!isTouching)*/
         return true;
     }
 
@@ -325,6 +303,27 @@ public class GameView extends SurfaceView implements Runnable //SurfaceHolder.Ca
         pellet.x = gameCharacter.x + gameCharacter.width;
         pellet.y = gameCharacter.y + (gameCharacter.height / 8);
         pellets.add(pellet);
+    }
+    public static GameView getInstance()
+    {
+        return instance;
+    }
+
+    @Override
+    public void surfaceCreated(@NonNull SurfaceHolder holder)
+    {
+        start();
+    }
+
+    @Override
+    public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
+
+    }
+
+    @Override
+    public void surfaceDestroyed(@NonNull SurfaceHolder holder)
+    {
+        stop();
     }
 }
 
