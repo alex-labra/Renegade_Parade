@@ -28,6 +28,8 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
     private float hatRadius;
     private JoystickListener joystickCallback;
     private final int ratio = 5; //The smaller, the more shading will occur
+    public float deltaX;
+    public float deltaY;
 
     private void setupDimensions()
     {
@@ -125,7 +127,8 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
                 if(displacement < baseRadius)
                 {
                     drawJoystick(e.getX(), e.getY());
-                    joystickCallback.onJoystickMoved((e.getX() - centerX)/baseRadius, (e.getY() - centerY)/baseRadius, getId());
+                    deltaX = (e.getX() - centerX)/baseRadius;
+                    deltaY = (e.getY() - centerY)/baseRadius;
                 }
                 else
                 {
@@ -133,13 +136,15 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
                     float constrainedX = centerX + (e.getX() - centerX) * ratio;
                     float constrainedY = centerY + (e.getY() - centerY) * ratio;
                     drawJoystick(constrainedX, constrainedY);
-                    joystickCallback.onJoystickMoved((constrainedX-centerX)/baseRadius, (constrainedY-centerY)/baseRadius, getId());
+                    deltaX = (constrainedX-centerX)/baseRadius;
+                    deltaY = (constrainedY-centerY)/baseRadius;
                 }
             }
             else
             {
                 drawJoystick(centerX, centerY);
-                joystickCallback.onJoystickMoved(0,0,getId());
+                deltaX = 0;
+                deltaY = 0;
             }
         }
         return true;

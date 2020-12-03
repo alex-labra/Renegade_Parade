@@ -223,7 +223,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
                 return;
             }
 
-            //drawing character
+            gameCharacter.x+=(JoystickView.getInstance().deltaX * gameCharacter.speed);
+            gameCharacter.y+=(JoystickView.getInstance().deltaY * gameCharacter.speed);
             canvas.drawBitmap(gameCharacter.getGameCharacter(), gameCharacter.x, gameCharacter.y, paint);
 
             //draw pellet loop

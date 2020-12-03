@@ -24,7 +24,6 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
     public TextView HighScore, yourScore, highScoreText, yourScoreText, gameOverText;
     public Button btnRetry,btnBack;
     private static InGameScreen instance;
-    private int speed = 15;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +55,7 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
 
     @Override
     public void onJoystickMoved(float xPercent, float yPercent, int id)
-    {
-        GameView.getInstance().gameCharacter.x+=(xPercent * speed);
-        GameView.getInstance().gameCharacter.y+=(yPercent * speed);
-    }
+    {}
 
     @Override
     protected void onPause() {

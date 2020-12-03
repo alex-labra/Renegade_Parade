@@ -11,7 +11,7 @@ import static com.team4.renegadeparade.GameView.ratioY;
 public class GameCharacter {
 
     int fire = 0;
-    int x, y, width, height, characterCount = 0, fireCount = 1;
+    int x, y, width, height, speed, characterCount = 0, fireCount = 1;
     Bitmap fire1, fire2, fire3, character1, character2, character3, deadCharacter;
     private GameView gameView;
 
@@ -50,7 +50,7 @@ public class GameCharacter {
 
         y = screenY / 2;
         x = (int)   (60 * ratioX);
-
+        speed = 15;
     }
 
     Bitmap getGameCharacter()   {
