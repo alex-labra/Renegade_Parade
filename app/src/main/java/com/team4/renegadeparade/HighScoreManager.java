@@ -11,8 +11,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class HighScoreManager
@@ -23,10 +27,11 @@ public class HighScoreManager
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private ValueEventListener listener;
-    private int highScore;
+    private List<Integer> highscores;
 
     public HighScoreManager()
     {
+        highscores = new ArrayList<Integer>();
         userID = new DeviceUuidFactory(MainActivity.getInstance()).getDeviceUuid();
         mAuth = FirebaseAuth.getInstance();
         authenticate();
@@ -34,23 +39,46 @@ public class HighScoreManager
 
     public int getHighScore()
     {
-        return highScore;
+        if (highscores.isEmpty())
+            return 0;
+        return highscores.get(0);
     }
 
-    public void setHighScore(int newScore)
+    public List<Integer> getTopScores(int amount)
     {
-        highScore = newScore;
+        List<Integer> list = new ArrayList<Integer>();
+        for (int i = 0; i<highscores.size(); i++)
+        {
+            if (i < amount)
+            {
+                list.add(highscores.get(i));
+            }
+            else
+                break;
+        }
+        return list;
+    }
+
+    public void setHighScore(int position, int newScore)
+    {
+        highscores.add(position, newScore);
         if (databaseReference != null)
-            databaseReference.setValue(highScore);
+            databaseReference.setValue(highscores);
     }
 
     public boolean checkHighScore(int newScore)
     {
-        if (newScore > highScore)
+        if (newScore == 0)
+            return false;
+        for (int i = 0; i<highscores.size(); i++)
         {
-            setHighScore(newScore);
-            return true;
+            if (highscores.get(i) < newScore)
+            {
+                setHighScore(i,newScore);
+                return true;
+            }
         }
+        setHighScore(highscores.size(), newScore);
         return false;
     }
 
@@ -77,7 +105,7 @@ public class HighScoreManager
     private void finishInitializing()
     {
         database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("users").child(userID.toString()).child("High Score");
+        databaseReference = database.getReference("users").child(userID.toString()).child("High Scores");
         listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -85,11 +113,8 @@ public class HighScoreManager
                 System.out.println("Reading high score from server.");
                 if (dataSnapshot.getValue() != null)
                 {
-                    highScore = dataSnapshot.getValue(Integer.class);
-                }
-                else
-                {
-                    setHighScore(0);
+                    GenericTypeIndicator<List<Integer>> t = new GenericTypeIndicator<List<Integer>>() {};
+                    highscores = dataSnapshot.getValue(t);
                 }
             }
 
