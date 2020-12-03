@@ -29,6 +29,7 @@ public class HighScoreManager
     private ValueEventListener listener;
     private List<Integer> highscores;
 
+
     public HighScoreManager()
     {
         highscores = new ArrayList<Integer>();
@@ -48,6 +49,7 @@ public class HighScoreManager
     {
         List<Integer> list = new ArrayList<Integer>();
         for (int i = 0; i<highscores.size(); i++)
+
         {
             if (i < amount)
             {
@@ -65,7 +67,7 @@ public class HighScoreManager
         if (databaseReference != null)
             databaseReference.setValue(highscores);
     }
-
+    //Replace if there is a high score
     public boolean checkHighScore(int newScore)
     {
         if (newScore == 0)

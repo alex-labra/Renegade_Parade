@@ -30,7 +30,7 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
         instance = this;
         //by alex
 
-        setContentView(R.layout.activity_game); //display game background
+       setContentView(R.layout.activity_game); //display game background
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
