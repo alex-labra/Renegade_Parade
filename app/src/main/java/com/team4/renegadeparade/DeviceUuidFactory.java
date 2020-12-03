@@ -8,6 +8,10 @@ import android.telephony.TelephonyManager;
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
+/*
+    Class created by emmby
+    https://stackoverflow.com/a/5626208
+ */
 public class DeviceUuidFactory
 {
     protected static final String PREFS_FILE = "device_id.xml";
