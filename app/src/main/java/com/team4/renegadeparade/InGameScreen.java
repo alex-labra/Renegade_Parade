@@ -22,7 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class InGameScreen extends AppCompatActivity implements JoystickView.JoystickListener
 {
     public TextView HighScore, yourScore, highScoreText, yourScoreText, gameOverText;
-    public Button btnRetry;
+    public Button btnRetry,btnBack;
     private static InGameScreen instance;
     private int speed = 15;
     @Override
@@ -43,6 +43,11 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
         gameOverText = findViewById(R.id.gameOver);
         btnRetry = (Button) findViewById(R.id.btnRetry);
         btnRetry.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.getInstance(), InGameScreen.class);
+            MainActivity.getInstance().startActivity(intent);
+        });
+        btnBack = (Button) findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.getInstance(), MainActivity.class);
             MainActivity.getInstance().startActivity(intent);
         });
@@ -81,12 +86,14 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
                 highScoreText.bringToFront();
                 HighScore.bringToFront();
                 btnRetry.bringToFront();
+                btnBack.bringToFront();
                 gameOverText.setVisibility(View.VISIBLE);
                 yourScoreText.setVisibility(View.VISIBLE);
                 yourScore.setVisibility(View.VISIBLE);
                 highScoreText.setVisibility(View.VISIBLE);
                 HighScore.setVisibility(View.VISIBLE);
                 btnRetry.setVisibility(View.VISIBLE);
+                btnBack.setVisibility(View.VISIBLE);
                 JoystickView.getInstance().setVisibility(View.GONE);
             }
         });
