@@ -9,9 +9,12 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class Stats extends AppCompatActivity {
 
     Button backButton;
+    TextView highscoresText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +27,17 @@ public class Stats extends AppCompatActivity {
         //Back button by Nathan
         backButton = findViewById(R.id.Stats_back);
         backButton.setOnClickListener(v -> back());
+
+        highscoresText = findViewById(R.id.HighScores);
+        if (MainActivity.getInstance().highscoreManager.getHighScore() != 0)
+        {
+            List<Integer> list = MainActivity.getInstance().highscoreManager.getTopScores(5);
+            String text="";
+            for (int i = 0; i<list.size();i++) {
+                text = text + (i+1) + ". " + list.get(i) + "\n";
+            }
+            highscoresText.setText(text);
+        }
     }
     //Back method by Nathan
     private void back()

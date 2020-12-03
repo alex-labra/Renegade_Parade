@@ -19,6 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/*
+    Class created by Nathan
+ */
+
 public class HighScoreManager
 {
     private UUID userID;
@@ -49,7 +53,6 @@ public class HighScoreManager
     {
         List<Integer> list = new ArrayList<Integer>();
         for (int i = 0; i<highscores.size(); i++)
-
         {
             if (i < amount)
             {
@@ -67,8 +70,8 @@ public class HighScoreManager
         if (databaseReference != null)
             databaseReference.setValue(highscores);
     }
-    //Replace if there is a high score
-    public boolean checkHighScore(int newScore)
+
+    public boolean addScoreToList(int newScore)
     {
         if (newScore == 0)
             return false;
@@ -122,7 +125,7 @@ public class HighScoreManager
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
+                // Getting data failed, log a message
                 System.out.println("Failed to read data from server!");
             }
         };

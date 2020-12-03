@@ -1,25 +1,18 @@
 package com.team4.renegadeparade;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -216,7 +209,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
                 activePlay = false;
                 canvas.drawBitmap(gameCharacter.getDeadCharacter(), gameCharacter.x, gameCharacter.y, paint);
                 getHolder().unlockCanvasAndPost(canvas);
-                MainActivity.getInstance().highscoreManager.checkHighScore(score);
+                MainActivity.getInstance().highscoreManager.addScoreToList(score);
                 InGameScreen.getInstance().yourScore.setText(score + "");
                 InGameScreen.getInstance().HighScore.setText(MainActivity.getInstance().highscoreManager.getHighScore() + "");
                 InGameScreen.getInstance().showEnd();
