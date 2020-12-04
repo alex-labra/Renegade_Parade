@@ -97,7 +97,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         //canvas.drawBitmap(GameCharacter.getGameCharacter(), GameCharacter.x, GameCharacter.y, paint);
         GameCharacter.character_color = Color.argb(255,0,0,255);
-
         //paint.setColorFilter(null);
 
         //color_status = 1;

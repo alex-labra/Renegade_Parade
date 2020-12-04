@@ -168,7 +168,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
                 }
 
                 int topRandomSpeed = (int) (6 * ratioX);
-                enemy.speed = random.nextInt(topRandomSpeed);
+                enemy.speed = Math.toIntExact((long) (random.nextInt(topRandomSpeed) + (score*0.4)));
 
                 if(enemy.speed <= 7 *ratioX) {
 
@@ -217,9 +217,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
                 InGameScreen.getInstance().showEnd();
                 return;
             }
-
-            gameCharacter.x+=(JoystickView.getInstance().deltaX * gameCharacter.speed);
-            gameCharacter.y+=(JoystickView.getInstance().deltaY * gameCharacter.speed);
+            float movementX = JoystickView.getInstance().deltaX * gameCharacter.speed;
+            float movementY = JoystickView.getInstance().deltaY * gameCharacter.speed;
+            if (gameCharacter.getCollisionShape().centerX() + movementX < getWidth()
+            && gameCharacter.getCollisionShape().centerX() + movementX > getWidth()*0.03)
+                gameCharacter.x+=(movementX);
+            if (gameCharacter.getCollisionShape().centerY() + movementY < getHeight()
+            && gameCharacter.getCollisionShape().centerY() + movementY > getHeight()*0.03)
+                gameCharacter.y+=(movementY);
             //code for color
             if(GameCharacter.character_color != 0) {
                 paint.setColorFilter(new PorterDuffColorFilter(GameCharacter.character_color, PorterDuff.Mode.SRC_IN));
