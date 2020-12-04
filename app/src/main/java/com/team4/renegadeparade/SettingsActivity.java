@@ -4,19 +4,30 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 import android.media.MediaPlayer;
 import android.view.View;
+import android.graphics.Paint;
+import android.graphics.Canvas;
+
+
+
 //Settings class done by Rey
 public class SettingsActivity extends AppCompatActivity {
     MediaPlayer player;
     Button backButton;
-    Button mute;
-    Button unmute;
+    Button mute, unmute;
+    Button red, green, blue;
     public static boolean musicPlaying = true;
+    public static int color_status = 0;
+    public static Paint paint;
+    public static Canvas canvas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +49,15 @@ public class SettingsActivity extends AppCompatActivity {
         //unmute button by rey
         unmute = findViewById(R.id.unmute);
         unmute.setOnClickListener(v -> unmuteMusic());
+
+        red = findViewById(R.id.red_character);
+        red.setOnClickListener(v -> redCharacter());
+
+        blue = findViewById(R.id.blue_character);
+        blue.setOnClickListener(v -> blueCharacter());
+
+        green = findViewById(R.id.green_character);
+        green.setOnClickListener(v -> greenCharacter());
 
 
     }
@@ -65,5 +85,40 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     }
+
+    private void blueCharacter()
+    {
+      //  paint.setColorFilter(new PorterDuffColorFilter(Color.argb(255,0,0,255), PorterDuff.Mode.SRC_IN));
+
+        //canvas.drawBitmap(GameCharacter.getGameCharacter(), GameCharacter.x, GameCharacter.y, paint);
+        GameCharacter.character_color = Color.argb(255,0,0,255);
+
+        //paint.setColorFilter(null);
+
+        //color_status = 1;
+
+    }
+
+    private void greenCharacter()
+    {
+       // paint.setColorFilter(new PorterDuffColorFilter(Color.argb(255,0,255,0), PorterDuff.Mode.SRC_IN));
+
+        //canvas.drawBitmap(GameCharacter.getGameCharacter(), GameCharacter.x, GameCharacter.y, paint);
+        GameCharacter.character_color = Color.argb(255,0,255,0);
+
+       // paint.setColorFilter(null);
+    }
+
+
+    private void redCharacter()
+    {
+        //paint.setColorFilter(new PorterDuffColorFilter(Color.argb(255,255,0,0), PorterDuff.Mode.SRC_IN));
+
+        //canvas.drawBitmap(GameCharacter.getGameCharacter(), GameCharacter.x, GameCharacter.y, paint);
+        GameCharacter.character_color = Color.argb(255,255,0,0);
+
+        //paint.setColorFilter(null);
+    }
+
 
 }

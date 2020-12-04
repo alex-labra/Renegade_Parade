@@ -3,6 +3,7 @@ package com.team4.renegadeparade;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Rect;
 
 import static com.team4.renegadeparade.GameView.ratioX;
@@ -13,6 +14,7 @@ public class GameCharacter {
     int fire = 0;
     int x, y, width, height, speed, characterCount = 0, fireCount = 1;
     Bitmap fire1, fire2, fire3, character1, character2, character3, deadCharacter;
+    public static int character_color = 0;
     private GameView gameView;
 
     GameCharacter(GameView gameView, int screenY, Resources res)   {

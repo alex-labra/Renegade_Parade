@@ -11,5 +11,9 @@
     <string name="settings_username">Input Username Here</string>
     <string name="settings_unmute">Unmute</string>
     <string name="settings_mute">Mute</string>
+    <string name="red">Red</string>
+    <string name="blue">Blue</string>
+    <string name="green">Green</string>
     <string name="_1">1</string>
+    <string name="character_color">Choose Character Color</string>
 </resources>

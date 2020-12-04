@@ -6,6 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -218,7 +220,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
 
             gameCharacter.x+=(JoystickView.getInstance().deltaX * gameCharacter.speed);
             gameCharacter.y+=(JoystickView.getInstance().deltaY * gameCharacter.speed);
+            //code for color
+            if(GameCharacter.character_color != 0) {
+                paint.setColorFilter(new PorterDuffColorFilter(GameCharacter.character_color, PorterDuff.Mode.SRC_IN));
+            }
             canvas.drawBitmap(gameCharacter.getGameCharacter(), gameCharacter.x, gameCharacter.y, paint);
+
+            paint.setColorFilter(null);
+
 
             //draw pellet loop
             for(Pellet pellet: pellets) {
