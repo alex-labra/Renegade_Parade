@@ -23,7 +23,7 @@ public class SettingsActivity extends AppCompatActivity {
     MediaPlayer player;
     Button backButton;
     Button mute, unmute;
-    Button red, green, blue;
+    Button red, green, blue, defaultColor;
     public static boolean musicPlaying = true;
     public static int color_status = 0;
     public static Paint paint;
@@ -58,6 +58,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         green = findViewById(R.id.green_character);
         green.setOnClickListener(v -> greenCharacter());
+
+        defaultColor = findViewById(R.id.default_color);
+        defaultColor.setOnClickListener(v -> defaultCharacter());
+
+
 
 
     }
@@ -118,6 +123,11 @@ public class SettingsActivity extends AppCompatActivity {
         GameCharacter.character_color = Color.argb(255,255,0,0);
 
         //paint.setColorFilter(null);
+    }
+
+    private void defaultCharacter()
+    {
+        GameCharacter.character_color = 0;
     }
 
 

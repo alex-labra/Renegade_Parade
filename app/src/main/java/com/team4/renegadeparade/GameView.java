@@ -138,7 +138,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
             pellet.x += 60 * ratioX; //manage speed of pellet
 
             for (Enemy enemy : enemies) {
-
+                //play sound here for enemy death in if statement
                 if(Rect.intersects(enemy.getCollisionShape(), pellet.getCollisionShape()))  {
 
                     enemy.x = - 2000;
@@ -182,7 +182,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
                 enemy.dead = false;
 
             }
-
+            //could put game over sound
             if(Rect.intersects(enemy.getCollisionShape(), gameCharacter.getCollisionShape()))   {
 
                 gameOver = true;
@@ -274,6 +274,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
         }
     }
 
+    //method with sound effects
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
