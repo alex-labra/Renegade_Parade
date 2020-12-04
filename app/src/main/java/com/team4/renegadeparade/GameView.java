@@ -9,6 +9,10 @@ import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -39,6 +43,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
     private Enemy[] enemies;
     private Random random;
     private int score = 0;
+
+   /* variables/objects for sounds effects -Rey
+    private static SoundPool soundpool;
+    private static int gun, edeath, death;
+    private AudioAttributes audio;
+    final int MAX = 4;
+    */
+
 
     int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
     int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
@@ -144,6 +156,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
                     enemy.x = - 2000;
                     pellet.x = screenX + 2000;
                     enemy.dead = true;
+
+
+
                     score++;
                 }
             }
@@ -186,6 +201,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
             if(Rect.intersects(enemy.getCollisionShape(), gameCharacter.getCollisionShape()))   {
 
                 gameOver = true;
+
+
                 return;
 
             }
@@ -279,11 +296,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
         }
     }
 
-    //method with sound effects
+    //method with gun sound effects
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
         gameCharacter.fire++;
+        //gunSound();
+
+
         /*
         if (event.getAction() == MotionEvent.ACTION_DOWN)
         {
@@ -318,6 +338,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
         return instance;
     }
 
+
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder holder)
     {
@@ -334,6 +355,51 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
     {
         stop();
     }
+
+
+
+ /*tried implementing with separate class and methods here in GameView -Rey
+
+   public void SoundEffects(Context context)
+    {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        {
+            audio = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .build();
+
+            soundpool = new SoundPool.Builder()
+                    .setAudioAttributes(audio)
+                    .setMaxStreams(MAX)
+                    .build();
+        }
+
+        gun = soundpool.load(context, R.raw.shoot, 1);
+        edeath = soundpool.load(context, R.raw.enemy_die, 1);
+        death = soundpool.load(context, R.raw.death_sound, 1);
+
+    }
+
+    public void gunSound()
+    {
+        soundpool.play(gun, 1.0f, 1.0f, 1, 0, 1.0f);
+    }
+
+    public void deathSound()
+    {
+        soundpool.play(death, 1.0f, 1.0f, 1, 0, 1.0f);
+    }
+
+    public void enemyDeathSound()
+    {
+        soundpool.play(edeath, 1.0f, 1.0f, 1, 0, 1.0f);
+    }
+
+*/
+
+
 }
 
 

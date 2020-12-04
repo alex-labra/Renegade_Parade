@@ -24,6 +24,8 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
     public TextView HighScore, yourScore, highScoreText, yourScoreText, gameOverText;
     public Button btnRetry,btnBack;
     private static InGameScreen instance;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
