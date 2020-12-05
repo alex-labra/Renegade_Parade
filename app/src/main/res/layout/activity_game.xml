@@ -59,6 +59,8 @@
         android:layout_height="88dp"
         android:text="RETRY"
         android:textColor="@color/black"
+        android:backgroundTint="@color/red"
+        android:alpha="0.60"
         android:textSize="30sp"
         android:typeface="serif"
         android:visibility="invisible"

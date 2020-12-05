@@ -47,7 +47,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
     private int score = 0;
     private SoundPool soundPool;
     private int sound1, sound2, sound3;
-    public InGameScreen inGameScreen;
 
    /* variables/objects for sounds effects -Rey
     private static SoundPool soundpool;
@@ -81,13 +80,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
         super(context, attributes);
         getHolder().addCallback(this);
         initialize();
-
-
-        /* @Rey, you need a class to play a sound
-        * the other way is to use a context class, basically an object reference, you tried using lollipop, we are not
-        * a callback can be used but I don't like that way, delete this!
-        */
-
+        
          //get soundpool to grab the .mp3 file
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)  {
 
