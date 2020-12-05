@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static com.team4.renegadeparade.SettingsActivity.musicPlaying;
+
 /*
     Class created by Nathan
  */
@@ -43,6 +45,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
     private Enemy[] enemies;
     private Random random;
     private int score = 0;
+    private SoundPool soundPool;
+    private int sound1;
+    public InGameScreen inGameScreen;
 
    /* variables/objects for sounds effects -Rey
     private static SoundPool soundpool;
@@ -76,13 +81,35 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
         super(context, attributes);
         getHolder().addCallback(this);
         initialize();
+
+
+        /* @Rey, you need a class to play a sound
+        * the other way is to use a context class, basically an object reference, you tried using lollipop, we are not
+        * a callback can be used but I don't like that way, delete this!
+        */
+
+         //get soundpool to grab the .mp3 file
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)  {
+
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .setUsage(AudioAttributes.USAGE_GAME).build();
+            soundPool = new SoundPool.Builder().setAudioAttributes(audioAttributes).build();
+
+        }   else   {
+            soundPool = new SoundPool(1,AudioManager.STREAM_MUSIC, 0);
+        }
+
+        sound1 = soundPool.load(context, R.raw.shot, 1);
     }
+
     void initialize()
     {
         //by alex
         instance = this;
         Point point = new Point();
         MainActivity.getInstance().getWindowManager().getDefaultDisplay().getSize(point);
+
         this.screenX = point.x;
         this.screenY = point.y;
 
@@ -223,6 +250,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
             paint.setTextSize(40);
                 canvas.drawText("Score: " + score, getWidth()/14,getHeight()/10, paint);
 
+
+            //draw enemies
+            for(Enemy enemy : enemies)  {
+
+                canvas.drawBitmap(enemy.getEnemy(), enemy.x, enemy.y, paint);
+
+            }
+
             if(gameOver)
             {
                 activePlay = false;
@@ -328,6 +363,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
 
     public void newPellet()
     {
+        //play sound on fire
+        if(musicPlaying == true)    {
+            soundPool.play(sound1, 1, 1, 0, 0, 1);
+        }
+
         Pellet pellet = new Pellet(getResources());
         pellet.x = gameCharacter.x + gameCharacter.width;
         pellet.y = gameCharacter.y + (gameCharacter.height / 8);
