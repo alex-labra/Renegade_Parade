@@ -49,6 +49,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_editor_absoluteX="321dp"
+        android:backgroundTint="@color/blue"
         android:text="@string/blue"
         />
     <Button
@@ -59,6 +60,7 @@
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_editor_absoluteX="321dp"
         android:text="@string/green"
+        android:backgroundTint="@color/green"
         android:id="@+id/green_character"
         />
     <Button
@@ -69,6 +71,7 @@
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_editor_absoluteX="321dp"
         android:text="@string/red"
+        android:backgroundTint="@color/red"
         android:id="@+id/red_character"
         />
 

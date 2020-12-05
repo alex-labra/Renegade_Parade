@@ -46,7 +46,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
     private Random random;
     private int score = 0;
     private SoundPool soundPool;
-    private int sound1;
+    private int sound1, sound2, sound3;
     public InGameScreen inGameScreen;
 
    /* variables/objects for sounds effects -Rey
@@ -100,7 +100,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
             soundPool = new SoundPool(1,AudioManager.STREAM_MUSIC, 0);
         }
 
-        sound1 = soundPool.load(context, R.raw.shot, 1);
+        sound1 = soundPool.load(context, R.raw.shoot, 1);
+        sound2 = soundPool.load(context, R.raw.death_sound,1);
+        sound3 = soundPool.load(context, R.raw.enemy_die,1);
     }
 
     void initialize()
@@ -183,7 +185,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
                     enemy.x = - 2000;
                     pellet.x = screenX + 2000;
                     enemy.dead = true;
-
+                    if(musicPlaying == true)    {
+                        soundPool.play(sound3, 1, 1, 0, 0, 1);
+                    }
 
 
                     score++;
@@ -267,6 +271,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
                 InGameScreen.getInstance().yourScore.setText(score + "");
                 InGameScreen.getInstance().HighScore.setText(MainActivity.getInstance().highscoreManager.getHighScore() + "");
                 InGameScreen.getInstance().showEnd();
+                if(musicPlaying == true)    {
+                    soundPool.play(sound2, 1, 1, 0, 0, 1);
+                }
+
                 return;
             }
             float movementX = JoystickView.getInstance().deltaX * gameCharacter.speed;
@@ -336,7 +344,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
     public boolean onTouchEvent(MotionEvent event) {
 
         gameCharacter.fire++;
-        //gunSound();
 
 
         /*
