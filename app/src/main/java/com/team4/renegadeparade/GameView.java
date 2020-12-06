@@ -206,7 +206,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
                     return;
                 }
 
-                int topRandomSpeed = (int) (20 * ratioX);
+                int topRandomSpeed = (int) (12 * ratioX);
                 enemy.speed = Math.toIntExact((long) (random.nextInt(topRandomSpeed) + (score*0.4)));
 
                 if(enemy.speed <= 7 *ratioX) {
