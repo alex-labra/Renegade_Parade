@@ -43,7 +43,7 @@
         android:layout_width="138dp"
         android:layout_height="93dp"
         android:gravity="center"
-        android:text="TOP SCORES"
+        android:text="TOP SCORE"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:typeface="serif"

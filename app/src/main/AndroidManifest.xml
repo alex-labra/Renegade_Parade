@@ -5,16 +5,12 @@
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <application
         android:allowBackup="true"
-        android:icon="@drawable/background"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="false"
-        android:theme="@style/Theme.RenegadeParade">
-        <!--
-         <
-        comment by alex, app icon change above on next phase
-        android:roundIcon="@mipmap/ic_launcher_round"
-        /
-        -->
+        android:theme="@style/Theme.RenegadeParade"
+        >
+
         <activity
             android:name=".Stats"
             android:screenOrientation="landscape" />
