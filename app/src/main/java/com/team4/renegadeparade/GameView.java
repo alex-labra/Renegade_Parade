@@ -1,6 +1,7 @@
 package com.team4.renegadeparade;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -395,8 +396,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
     {
         stop();
     }
-
-
 
  /*tried implementing with separate class and methods here in GameView -Rey
 

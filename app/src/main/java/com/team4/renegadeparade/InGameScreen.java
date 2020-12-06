@@ -64,13 +64,22 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
         super.onPause();
         if (GameView.getInstance() != null)
             GameView.getInstance().stop();
+
+        Intent intent = new Intent(InGameScreen.this, BackgroundSoundService.class);
+        stopService(intent);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (GameView.getInstance() != null)
+        if (GameView.getInstance() != null) {
             GameView.getInstance().start();
+        }
+
+        if(SettingsActivity.musicPlaying == true) {
+            Intent intent = new Intent(InGameScreen.this, BackgroundSoundService.class);
+            startService(intent);
+        }
     }
     public void showEnd()
     {
@@ -100,4 +109,6 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
     {
         return instance;
     }
+
+
 }

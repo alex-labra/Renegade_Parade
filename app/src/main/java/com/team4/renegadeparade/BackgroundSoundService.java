@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 
 
 //done by rey
+
+
 public class BackgroundSoundService extends Service {
     MediaPlayer mediaPlayer;
     @Nullable
@@ -19,13 +21,9 @@ public class BackgroundSoundService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-
-
-
             mediaPlayer = MediaPlayer.create(this, R.raw.lounge);
             mediaPlayer.setLooping(true); // Set looping
             mediaPlayer.setVolume(100, 100);
-
     }
     public int onStartCommand(Intent intent, int flags, int startId) {
         mediaPlayer.start();
@@ -33,16 +31,19 @@ public class BackgroundSoundService extends Service {
         return startId;
     }
     public void onStart(Intent intent, int startId) {
+
     }
     @Override
     public void onDestroy() {
-        mediaPlayer.stop();
-        mediaPlayer.release();
+
+            mediaPlayer.stop();
+            mediaPlayer.release();
+
     }
     @Override
     public void onLowMemory() {
     }
 
 
-
 }
+

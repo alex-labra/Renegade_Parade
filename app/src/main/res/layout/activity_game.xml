@@ -55,8 +55,8 @@
 
     <Button
         android:id="@+id/btnRetry"
-        android:layout_width="143dp"
-        android:layout_height="88dp"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
         android:text="RETRY"
         android:textColor="@color/black"
         android:backgroundTint="@color/red"

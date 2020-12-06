@@ -129,5 +129,21 @@ public class SettingsActivity extends AppCompatActivity {
         GameCharacter.character_color = 0;
     }
 
+    public void onResume() {
+        super.onResume();
+        if(SettingsActivity.musicPlaying == true) {
+            Intent intent = new Intent(SettingsActivity.this, BackgroundSoundService.class);
+            startService(intent);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        Intent intent = new Intent(SettingsActivity.this, BackgroundSoundService.class);
+        stopService(intent);
+
+    }
 
 }

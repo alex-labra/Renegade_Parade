@@ -45,4 +45,21 @@ public class Stats extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    public void onResume() {
+        super.onResume();
+        if(SettingsActivity.musicPlaying == true) {
+            Intent intent = new Intent(Stats.this, BackgroundSoundService.class);
+            startService(intent);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        Intent intent = new Intent(Stats.this, BackgroundSoundService.class);
+        stopService(intent);
+
+    }
 }
