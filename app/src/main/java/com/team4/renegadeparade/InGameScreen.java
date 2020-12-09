@@ -2,15 +2,10 @@ package com.team4.renegadeparade;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +25,6 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         instance = this;
-        //by alex
 
        setContentView(R.layout.activity_game); //display game background
 
@@ -56,8 +50,7 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
 
 
     @Override
-    public void onJoystickMoved(float xPercent, float yPercent, int id)
-    {}
+    public void onJoystickMoved(float xPercent, float yPercent, int id) {   }
 
     @Override
     protected void onPause() {
@@ -65,6 +58,7 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
         if (GameView.getInstance() != null)
             GameView.getInstance().stop();
 
+        //by alex *debugging, stop music
         Intent intent = new Intent(InGameScreen.this, BackgroundSoundService.class);
         stopService(intent);
     }
@@ -76,6 +70,7 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
             GameView.getInstance().start();
         }
 
+        //by alex *debugging, play music
         if(SettingsActivity.musicPlaying == true) {
             Intent intent = new Intent(InGameScreen.this, BackgroundSoundService.class);
             startService(intent);
@@ -105,10 +100,10 @@ public class InGameScreen extends AppCompatActivity implements JoystickView.Joys
             }
         });
     }
+
     public static InGameScreen getInstance()
     {
         return instance;
     }
-
 
 }

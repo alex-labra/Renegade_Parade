@@ -46,6 +46,7 @@ public class Stats extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //block by alex, play music when class is opened
     public void onResume() {
         super.onResume();
         if(SettingsActivity.musicPlaying == true) {
@@ -54,6 +55,7 @@ public class Stats extends AppCompatActivity {
         }
     }
 
+    //block by alex, stop music when leaving class
     @Override
     public void onPause() {
         super.onPause();

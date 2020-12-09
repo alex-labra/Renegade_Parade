@@ -25,8 +25,8 @@ import java.util.UUID;
 
 public class HighScoreManager
 {
-    private UUID userID;
-    private FirebaseAuth mAuth;
+    private final UUID userID;
+    private final FirebaseAuth mAuth;
     private FirebaseUser user;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;

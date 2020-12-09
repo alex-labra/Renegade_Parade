@@ -8,6 +8,9 @@ import android.graphics.Rect;
 import static com.team4.renegadeparade.GameView.ratioX;
 import static com.team4.renegadeparade.GameView.ratioY;
 
+    //class made by alex in full
+
+//class grabs .jpg and creates a size
 public class Enemy {
 
     public int speed = 15;
@@ -37,6 +40,7 @@ public class Enemy {
         y = -height;
     }
 
+    //Loops enemy .jpg file so one appears after another just in milliseconds
     Bitmap getEnemy()   {
 
         if(enemyCount == 1) {

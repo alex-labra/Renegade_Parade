@@ -4,8 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings.Secure;
 import android.telephony.TelephonyManager;
-
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 /*
@@ -36,22 +35,18 @@ public class DeviceUuidFactory
                         // fallback on deviceId,
                         // unless it's not available, then fallback on a random
                         // number which we store to a prefs file
-                        try {
-                            if (!"9774d56d682e549c".equals(androidId)) {
-                                uuid = UUID.nameUUIDFromBytes(androidId
-                                        .getBytes("utf8"));
-                            } else {
-                                final String deviceId = (
-                                        (TelephonyManager) context
-                                                .getSystemService(Context.TELEPHONY_SERVICE))
-                                        .getDeviceId();
-                                uuid = deviceId != null ? UUID
-                                        .nameUUIDFromBytes(deviceId
-                                                .getBytes("utf8")) : UUID
-                                        .randomUUID();
-                            }
-                        } catch (UnsupportedEncodingException e) {
-                            throw new RuntimeException(e);
+                        if (!"9774d56d682e549c".equals(androidId)) {
+                            uuid = UUID.nameUUIDFromBytes(androidId
+                                    .getBytes(StandardCharsets.UTF_8));
+                        } else {
+                            final String deviceId = (
+                                    (TelephonyManager) context
+                                            .getSystemService(Context.TELEPHONY_SERVICE))
+                                    .getDeviceId();
+                            uuid = deviceId != null ? UUID
+                                    .nameUUIDFromBytes(deviceId
+                                            .getBytes(StandardCharsets.UTF_8)) : UUID
+                                    .randomUUID();
                         }
                         // Write the value out to the prefs file
                         prefs.edit()
@@ -87,7 +82,7 @@ public class DeviceUuidFactory
      * Works around a bug in Android 2.2 for many devices when using ANDROID_ID
      * directly.
      *
-     * @see http://code.google.com/p/android/issues/detail?id=10603
+     * @see //http://code.google.com/p/android/issues/detail?id=10603
      *
      * @return a UUID that may be used to uniquely identify your device for most
      *         purposes.

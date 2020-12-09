@@ -28,12 +28,13 @@ import java.util.Random;
 import static com.team4.renegadeparade.SettingsActivity.musicPlaying;
 
 /*
-    Class created by Nathan
+    Class created by Nathan, Alex
  */
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runnable
 {
     private static GameView instance;
+
     //thread by Alex
     private Thread thread;
     public boolean activePlay, gameOver = false;
@@ -49,22 +50,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
     private SoundPool soundPool;
     private int sound1, sound2, sound3;
 
-   /* variables/objects for sounds effects -Rey
-    private static SoundPool soundpool;
-    private static int gun, edeath, death;
-    private AudioAttributes audio;
-    final int MAX = 4;
-    */
-
-
-    int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+    //implemented by alex
+    int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;//grab screen and width from device
     int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-    //private float centerX;
-    //private float centerY;
-    //private Drawable mBackground;
-
-    //added screen resolution by alex
     public GameView(Context context) {
         super(context);
         getHolder().addCallback(this);
@@ -82,7 +71,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
         getHolder().addCallback(this);
         initialize();
         
-         //get soundpool to grab the .mp3 file
+         //get soundpool to grab the .mp3 file by alex
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)  {
 
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
@@ -99,17 +88,18 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
         sound3 = soundPool.load(context, R.raw.enemy_die,1);
     }
 
+    //block by alex
     void initialize()
     {
-        //by alex
+
         instance = this;
         Point point = new Point();
         MainActivity.getInstance().getWindowManager().getDefaultDisplay().getSize(point);
 
-        this.screenX = point.x;
+        this.screenX = point.x;//find given poin on screen
         this.screenY = point.y;
 
-        ratioX = screenWidth / screenX; //screen ratio bug, should apply to all devices
+        ratioX = screenWidth / screenX; //create screen ratio
         ratioY = screenHeight / screenY;
 
         background1 = new Background(screenX, screenY, getResources());
@@ -119,6 +109,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
 
         pellets = new ArrayList<>();
 
+        //creates incoming enemies on screen
         enemies = new Enemy[3];
         for(int i = 0; i < 3; i++)  {
 
@@ -135,7 +126,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
 
         score = 0;
     }
-    @Override //by alex
+
+    //block by alex
+    @Override
     public void run() {
 
         while(activePlay)   {
@@ -146,7 +139,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
 
     }
 
-    //by alex
+    //block by alex
+    // NOTE: if not implemented by me please write you name next to your code
     private void update()   {
 
         background1.x -= 6 * ratioX; //moving on x-axis change to y to move on y-axis
@@ -164,6 +158,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
 
         }
 
+        //creates the bullets fired in game screen
         List<Pellet> offScreenPellet = new ArrayList<>();
         for(Pellet pellet : pellets) {
 
@@ -190,6 +185,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
 
         }
 
+        //removes bullets when they are offscreen
         for(Pellet pellet : offScreenPellet) {
 
             pellets.remove(pellet);
@@ -203,12 +199,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
             if(enemy.x + enemy.width < 0)   {
 
                 if(!enemy.dead) {
-                    gameOver = true;
+                    gameOver = true;//ends game
                     return;
                 }
 
+                //creates speed for bullets and increases speed over time
                 int topRandomSpeed = (int) (7 * ratioX);
-                enemy.speed = Math.toIntExact((long) (random.nextInt(topRandomSpeed) + (score*0.1)));
+                enemy.speed = Math.toIntExact((long) (random.nextInt(topRandomSpeed) + (score*0.1))); //random speed by Nathan
 
                 if(enemy.speed <= 1 *ratioX) {
 
@@ -222,11 +219,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
                 enemy.dead = false;
 
             }
-            //could put game over sound
+
             if(Rect.intersects(enemy.getCollisionShape(), gameCharacter.getCollisionShape()))   {
 
                 gameOver = true;
-
 
                 return;
 
@@ -235,21 +231,21 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
 
     }
 
-    //by alex
+
     private void draw() {
 
+        //by alex
         if(getHolder().getSurface().isValid()) {
 
             Canvas canvas = getHolder().lockCanvas();
             canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
             canvas.drawBitmap(background2.background, background2.x, background2.y, paint);
+
             //Drawing the score. by Zayn
             paint.setColor(Color.argb(255,  249, 129, 0));
             paint.setTextSize(40);
                 canvas.drawText("Score: " + score, getWidth()/14,getHeight()/10, paint);
 
-
-            //draw enemies
             for(Enemy enemy : enemies)  {
 
                 canvas.drawBitmap(enemy.getEnemy(), enemy.x, enemy.y, paint);
@@ -288,12 +284,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
             paint.setColorFilter(null);
 
 
-            //draw pellet loop
+            //draw pellet loop by alex
             for(Pellet pellet: pellets) {
                 canvas.drawBitmap(pellet.pellet, pellet.x, pellet.y, paint);
             }
 
-            //draw enemies
+            //draw enemies by alex
             for(Enemy enemy : enemies)  {
 
                 canvas.drawBitmap(enemy.getEnemy(), enemy.x, enemy.y, paint);
@@ -302,7 +298,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
             getHolder().unlockCanvasAndPost(canvas); //show moving background
         }
     }
-    //by alex
+    //block by alex
     private void sleep()   {
         try {
             Thread.sleep(5);
@@ -311,7 +307,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
         }
     }
 
-    //by alex
+    //block by alex
     public void start()
     {
         if (thread == null || !thread.isAlive())
@@ -322,7 +318,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
         }
     }
 
-    //by alex
+    //block by alex
     public void stop()
     {
         try {
@@ -333,35 +329,16 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
         }
     }
 
-    //method with gun sound effects
+    //block by alex
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
         gameCharacter.fire++;
 
-
-        /*
-        if (event.getAction() == MotionEvent.ACTION_DOWN)
-        {
-            if (event.getX() >= gameCharacter.x && event.getX() < (gameCharacter.x + gameCharacter.character1.getWidth())
-                    && event.getY() >= gameCharacter.y && event.getY() < (gameCharacter.y + gameCharacter.character1.getHeight()))
-            {
-                isTouching = true;
-            }
-        }
-        else if (event.getAction() == MotionEvent.ACTION_MOVE && isTouching)
-        {
-            gameCharacter.x = Math.round(event.getX()) - gameCharacter.character1.getWidth()/2;
-            gameCharacter.y = Math.round(event.getY()) - gameCharacter.character1.getHeight()/2;
-        }
-        else if (event.getAction() == MotionEvent.ACTION_UP)
-        {
-            isTouching = false;
-        }
-        if (!isTouching)*/
         return true;
     }
 
+    //block by alex
     public void newPellet()
     {
         //play sound on fire
@@ -371,7 +348,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
 
         Pellet pellet = new Pellet(getResources());
         pellet.x = gameCharacter.x + gameCharacter.width;
-        pellet.y = gameCharacter.y + (gameCharacter.height / 8);
+        pellet.y = gameCharacter.y + (gameCharacter.height / 8); //set bullet size
         pellets.add(pellet);
     }
     public static GameView getInstance()
@@ -396,47 +373,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
     {
         stop();
     }
-
- /*tried implementing with separate class and methods here in GameView -Rey
-
-   public void SoundEffects(Context context)
-    {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-        {
-            audio = new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_GAME)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                    .build();
-
-            soundpool = new SoundPool.Builder()
-                    .setAudioAttributes(audio)
-                    .setMaxStreams(MAX)
-                    .build();
-        }
-
-        gun = soundpool.load(context, R.raw.shoot, 1);
-        edeath = soundpool.load(context, R.raw.enemy_die, 1);
-        death = soundpool.load(context, R.raw.death_sound, 1);
-
-    }
-
-    public void gunSound()
-    {
-        soundpool.play(gun, 1.0f, 1.0f, 1, 0, 1.0f);
-    }
-
-    public void deathSound()
-    {
-        soundpool.play(death, 1.0f, 1.0f, 1, 0, 1.0f);
-    }
-
-    public void enemyDeathSound()
-    {
-        soundpool.play(edeath, 1.0f, 1.0f, 1, 0, 1.0f);
-    }
-
-*/
 
 
 }

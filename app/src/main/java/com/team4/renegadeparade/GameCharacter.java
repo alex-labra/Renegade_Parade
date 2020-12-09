@@ -9,14 +9,17 @@ import android.graphics.Rect;
 import static com.team4.renegadeparade.GameView.ratioX;
 import static com.team4.renegadeparade.GameView.ratioY;
 
+    //class made by alex in full
+
 public class GameCharacter {
 
     int fire = 0;
     int x, y, width, height, speed, characterCount = 0, fireCount = 1;
     Bitmap fire1, fire2, fire3, character1, character2, character3, deadCharacter;
     public static int character_color = 0;
-    private GameView gameView;
+    private final GameView gameView;
 
+    //grabs main character from drawable, main character, firing character && dead character
     GameCharacter(GameView gameView, int screenY, Resources res)   {
         this.gameView = gameView;
 
@@ -57,6 +60,7 @@ public class GameCharacter {
 
     Bitmap getGameCharacter()   {
 
+        //Loops main game character when it fires .jpg file so one appears after another just in milliseconds
         if(fire != 0)   {
 
             if(fireCount == 1)  {
@@ -76,6 +80,7 @@ public class GameCharacter {
             return fire3;
         }
 
+        //Loops main game character .jpg file so one appears after another just in milliseconds
         if(characterCount == 0) {
             characterCount++;
             return character1;

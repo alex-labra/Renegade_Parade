@@ -8,11 +8,14 @@ import android.graphics.Rect;
 import static com.team4.renegadeparade.GameView.ratioX;
 import static com.team4.renegadeparade.GameView.ratioY;
 
+//class made by alex in full
+
 public class Pellet {
 
     int x, y, width, height;
     Bitmap pellet;
 
+    //grabs .png on drawable
     Pellet(Resources res)   {
 
         pellet = BitmapFactory.decodeResource(res, R.drawable.pellet);
@@ -20,7 +23,7 @@ public class Pellet {
         width = pellet.getWidth();
         height = pellet.getHeight();
 
-        width /= 7;
+        width /= 7;//set bullet size
         height /= 7;
 
         width *= (int) ratioX;

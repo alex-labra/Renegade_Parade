@@ -16,18 +16,12 @@ import android.view.View;
 import android.graphics.Paint;
 import android.graphics.Canvas;
 
-
-
 //Settings class done by Rey
 public class SettingsActivity extends AppCompatActivity {
-    MediaPlayer player;
     Button backButton;
     Button mute, unmute;
     Button red, green, blue, defaultColor;
     public static boolean musicPlaying = true;
-    public static int color_status = 0;
-    public static Paint paint;
-    public static Canvas canvas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,35 +87,24 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void blueCharacter()
     {
-      //  paint.setColorFilter(new PorterDuffColorFilter(Color.argb(255,0,0,255), PorterDuff.Mode.SRC_IN));
 
-        //canvas.drawBitmap(GameCharacter.getGameCharacter(), GameCharacter.x, GameCharacter.y, paint);
         GameCharacter.character_color = Color.argb(255,0,0,255);
-        //paint.setColorFilter(null);
-
-        //color_status = 1;
 
     }
 
     private void greenCharacter()
     {
-       // paint.setColorFilter(new PorterDuffColorFilter(Color.argb(255,0,255,0), PorterDuff.Mode.SRC_IN));
 
-        //canvas.drawBitmap(GameCharacter.getGameCharacter(), GameCharacter.x, GameCharacter.y, paint);
         GameCharacter.character_color = Color.argb(255,0,255,0);
 
-       // paint.setColorFilter(null);
     }
 
 
     private void redCharacter()
     {
-        //paint.setColorFilter(new PorterDuffColorFilter(Color.argb(255,255,0,0), PorterDuff.Mode.SRC_IN));
 
-        //canvas.drawBitmap(GameCharacter.getGameCharacter(), GameCharacter.x, GameCharacter.y, paint);
         GameCharacter.character_color = Color.argb(255,255,0,0);
 
-        //paint.setColorFilter(null);
     }
 
     private void defaultCharacter()
@@ -129,6 +112,7 @@ public class SettingsActivity extends AppCompatActivity {
         GameCharacter.character_color = 0;
     }
 
+    //stop music when leaving class, block by alex
     public void onResume() {
         super.onResume();
         if(SettingsActivity.musicPlaying == true) {
@@ -137,6 +121,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    //stop music when leaving class, block by alex
     @Override
     public void onPause() {
         super.onPause();
