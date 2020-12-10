@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
-
+// stats class by Zayn
 public class Stats extends AppCompatActivity {
 
     Button backButton;
@@ -27,7 +27,7 @@ public class Stats extends AppCompatActivity {
         //Back button by Nathan
         backButton = findViewById(R.id.Stats_back);
         backButton.setOnClickListener(v -> back());
-
+        //listing highscore
         highscoresText = findViewById(R.id.HighScores);
         if (MainActivity.getInstance().highscoreManager.getHighScore() != 0)
         {
