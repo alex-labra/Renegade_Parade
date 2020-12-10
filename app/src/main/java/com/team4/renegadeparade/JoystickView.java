@@ -14,9 +14,12 @@ import android.view.View;
 
 import org.jetbrains.annotations.NotNull;
 
-/**
+/*
  * Created by Daniel on 7/25/2016.
  * https://github.com/efficientisoceles/JoystickView
+ * Modified by: Nathan
+ * Tested by: Rey, Nathan, Alex, and Zayn
+ * Debugged by: Nathan
  */
 
 public class JoystickView extends SurfaceView implements SurfaceHolder.Callback, View.OnTouchListener
@@ -26,8 +29,9 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
     private float centerY;
     private float baseRadius;
     private float hatRadius;
-    private JoystickListener joystickCallback;
     private final int ratio = 5; //The smaller, the more shading will occur
+
+    //Added deltaX and deltaY values and removed joystick listener callback by Nathan
     public float deltaX;
     public float deltaY;
 
@@ -47,8 +51,6 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
         super(context);
         getHolder().addCallback(this);
         setOnTouchListener(this);
-        if(context instanceof JoystickListener)
-            joystickCallback = (JoystickListener) context;
     }
 
     public JoystickView(Context context, AttributeSet attributes, int style)
@@ -56,8 +58,6 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
         super(context, attributes, style);
         getHolder().addCallback(this);
         setOnTouchListener(this);
-        if(context instanceof JoystickListener)
-            joystickCallback = (JoystickListener) context;
     }
 
     public JoystickView (Context context, AttributeSet attributes)
@@ -65,8 +65,6 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
         super(context, attributes);
         getHolder().addCallback(this);
         setOnTouchListener(this);
-        if(context instanceof JoystickListener)
-            joystickCallback = (JoystickListener) context;
     }
 
     private void drawJoystick(float newX, float newY)
@@ -106,6 +104,7 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
     @Override
     public void surfaceCreated(SurfaceHolder holder)
     {
+        //Setting up joystick after the surface is created instead of when the class is initialized so conflicts don't occur.
         setupDimensions();
         drawJoystick(centerX, centerY);
     }
@@ -119,7 +118,7 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
     @Override
     public boolean onTouch(View v, MotionEvent e)
     {
-        if(v.equals(this) && GameView.getInstance().activePlay)
+        if(v.equals(this) && GameView.getInstance().activePlay) //Added boolean check to make sure game isn't over by Nathan
         {
             if(e.getAction() != MotionEvent.ACTION_UP)
             {
@@ -127,6 +126,7 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
                 if(displacement < baseRadius)
                 {
                     drawJoystick(e.getX(), e.getY());
+                    //Set deltaX and deltaY values instead of joystick listener callback by Nathan
                     deltaX = (e.getX() - centerX)/baseRadius;
                     deltaY = (e.getY() - centerY)/baseRadius;
                 }
@@ -136,6 +136,7 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
                     float constrainedX = centerX + (e.getX() - centerX) * ratio;
                     float constrainedY = centerY + (e.getY() - centerY) * ratio;
                     drawJoystick(constrainedX, constrainedY);
+                    //Set deltaX and deltaY values instead of joystick listener callback by Nathan
                     deltaX = (constrainedX-centerX)/baseRadius;
                     deltaY = (constrainedY-centerY)/baseRadius;
                 }
@@ -143,6 +144,7 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
             else
             {
                 drawJoystick(centerX, centerY);
+                //Set deltaX and deltaY values instead of joystick listener callback by Nathan
                 deltaX = 0;
                 deltaY = 0;
             }
@@ -150,18 +152,9 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
         return true;
     }
 
-    public void centerJoystick()
-    {
-        drawJoystick(centerX, centerY);
-    }
-
+    //Instance by Nathan
     public static JoystickView getInstance()
     {
         return instance;
-    }
-
-    public interface JoystickListener
-    {
-        void onJoystickMoved(float xPercent, float yPercent, int id);
     }
 }

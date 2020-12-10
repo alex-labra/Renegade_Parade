@@ -8,7 +8,11 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 
-//done by rey
+/*
+    Written by: Rey
+    Tested by: Rey, Nathan, Alex, and Zayn
+    Debugged by: Rey
+ */
 
 
 public class BackgroundSoundService extends Service {

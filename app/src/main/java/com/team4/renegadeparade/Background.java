@@ -4,7 +4,11 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-    //class made by alex
+    /*
+    Written by: Alex
+    Tested by: Rey, Nathan, Alex, and Zayn
+    Debugged by: Alex
+ */
     //all art on drawable folder was made by alex
 
 public class Background {

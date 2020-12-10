@@ -28,7 +28,9 @@ import java.util.Random;
 import static com.team4.renegadeparade.SettingsActivity.musicPlaying;
 
 /*
-    Class created by Nathan, Alex
+    Written by: Nathan, Alex, Rey, and Zayn
+    Tested by: Rey, Nathan, Alex, and Zayn
+    Debugged by: Nathan, Alex, Rey, and Zayn
  */
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runnable
@@ -105,7 +107,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
         background1 = new Background(screenX, screenY, getResources());
         background2 = new Background(screenX, screenY, getResources());
 
-        gameCharacter = new GameCharacter(this, screenY, getResources());
+        gameCharacter = new GameCharacter(screenY, getResources());
 
         pellets = new ArrayList<>();
 
@@ -140,7 +142,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
     }
 
     //block by alex
-    // NOTE: if not implemented by me please write you name next to your code
     private void update()   {
 
         background1.x -= 6 * ratioX; //moving on x-axis change to y to move on y-axis
@@ -205,7 +206,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
 
                 //creates speed for bullets and increases speed over time
                 int topRandomSpeed = (int) (7 * ratioX);
-                enemy.speed = Math.toIntExact((long) (random.nextInt(topRandomSpeed) + (score*0.1))); //random speed by Nathan
+                //Enemy speed increase based on score by Nathan
+                enemy.speed = Math.toIntExact((long) (random.nextInt(topRandomSpeed) + (score*0.1)));
 
                 if(enemy.speed <= 1 *ratioX) {
 
@@ -257,25 +259,33 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
                 activePlay = false;
                 canvas.drawBitmap(gameCharacter.getDeadCharacter(), gameCharacter.x, gameCharacter.y, paint);
                 getHolder().unlockCanvasAndPost(canvas);
+                //Highscore stuff and showEnd by Nathan
+                //Add score to high score list
                 MainActivity.getInstance().highscoreManager.addScoreToList(score);
+                //Set score and high score text
                 InGameScreen.getInstance().yourScore.setText(score + "");
                 InGameScreen.getInstance().HighScore.setText(MainActivity.getInstance().highscoreManager.getHighScore() + "");
+                //display game over text and scores
                 InGameScreen.getInstance().showEnd();
+
                 if(musicPlaying == true)    {
                     soundPool.play(sound2, 1, 1, 0, 0, 1);
                 }
 
                 return;
             }
+            //Movement by Nathan
             float movementX = JoystickView.getInstance().deltaX * gameCharacter.speed;
             float movementY = JoystickView.getInstance().deltaY * gameCharacter.speed;
+            //Ensures that the game character isn't going off screen before they are moved
             if (gameCharacter.getCollisionShape().centerX() + movementX < getWidth()
             && gameCharacter.getCollisionShape().centerX() + movementX > getWidth()*0.03)
                 gameCharacter.x+=(movementX);
             if (gameCharacter.getCollisionShape().centerY() + movementY < getHeight()
             && gameCharacter.getCollisionShape().centerY() + movementY > getHeight()*0.03)
                 gameCharacter.y+=(movementY);
-            //code for color
+
+            //Color by Rey
             if(GameCharacter.character_color != 0) {
                 paint.setColorFilter(new PorterDuffColorFilter(GameCharacter.character_color, PorterDuff.Mode.SRC_IN));
             }
@@ -331,10 +341,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
 
     //block by alex
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
+    public boolean onTouchEvent(MotionEvent event)
+    {
         gameCharacter.fire++;
-
         return true;
     }
 
@@ -351,12 +360,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
         pellet.y = gameCharacter.y + (gameCharacter.height / 8); //set bullet size
         pellets.add(pellet);
     }
+    //Instance by Nathan
     public static GameView getInstance()
     {
         return instance;
     }
 
-
+    //starts game thread when the screen surface is created
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder holder)
     {
@@ -367,7 +377,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,Runn
     public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
 
     }
-
+    //stops game thread when the screen surface is destroyeds
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder holder)
     {

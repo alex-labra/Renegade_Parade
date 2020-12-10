@@ -7,6 +7,12 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Button;
 
+/*
+    Written by: Rey, Nathan, Alex, and Zayn
+    Tested by: Rey, Nathan, Alex, and Zayn
+    Debugged by: Rey, Nathan, Alex, and Zayn
+ */
+
 public class MainActivity extends AppCompatActivity {
     private Button statsbutton;
     private Button playbutton;
@@ -17,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @Override //by alex
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //By Nathan
         instance = this;
         highscoreManager = new HighScoreManager();
 
@@ -61,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Stats.class);
         startActivity(intent);
     }
+    //By Nathan
     private void startMatch()
     {
         Intent intent = new Intent(this, InGameScreen.class);
@@ -72,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent2 = new Intent(this, SettingsActivity.class);
         startActivity(intent2);
     }
+    //By Nathan
     public static MainActivity getInstance()
     {
         return instance;

@@ -16,7 +16,11 @@ import android.view.View;
 import android.graphics.Paint;
 import android.graphics.Canvas;
 
-//Settings class done by Rey
+/*
+    Written by: Rey
+    Tested by: Rey, Nathan, Alex, and Zayn
+    Debugged by: Rey
+*/
 public class SettingsActivity extends AppCompatActivity {
     Button backButton;
     Button mute, unmute;

@@ -8,7 +8,11 @@ import android.graphics.Rect;
 import static com.team4.renegadeparade.GameView.ratioX;
 import static com.team4.renegadeparade.GameView.ratioY;
 
-//class made by alex in full
+/*
+    Written by: Alex
+    Tested by: Rey, Nathan, Alex, and Zayn
+    Debugged by: Alex
+*/
 
 public class Pellet {
 

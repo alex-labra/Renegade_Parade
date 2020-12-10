@@ -10,7 +10,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
-// stats class by Zayn
+
+/*
+    Written by: Zayn, Nathan, and Alex
+    Tested by: Rey, Nathan, Alex, and Zayn
+    Debugged by: Zayn, Nathan, and Alex
+*/
 public class Stats extends AppCompatActivity {
 
     Button backButton;
@@ -27,12 +32,15 @@ public class Stats extends AppCompatActivity {
         //Back button by Nathan
         backButton = findViewById(R.id.Stats_back);
         backButton.setOnClickListener(v -> back());
-        //listing highscore
+        //listing highscores by Nathan
         highscoresText = findViewById(R.id.HighScores);
+        //Checks if a high score exists
         if (MainActivity.getInstance().highscoreManager.getHighScore() != 0)
         {
+            //Gets the top five scores from the high score manager
             List<Integer> list = MainActivity.getInstance().highscoreManager.getTopScores(5);
             String text="";
+            //loops through list of scores and sets the text equal to itself, the position of the score, the score, and the new line symbol to start a new line
             for (int i = 0; i<list.size();i++) {
                 text = text + (i+1) + ". " + list.get(i) + "\n";
             }

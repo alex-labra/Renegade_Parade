@@ -9,7 +9,11 @@ import android.graphics.Rect;
 import static com.team4.renegadeparade.GameView.ratioX;
 import static com.team4.renegadeparade.GameView.ratioY;
 
-    //class made by alex in full
+/*
+    Written by: Alex
+    Tested by: Rey, Nathan, Alex, and Zayn
+    Debugged by: Alex
+ */
 
 public class GameCharacter {
 
@@ -17,11 +21,10 @@ public class GameCharacter {
     int x, y, width, height, speed, characterCount = 0, fireCount = 1;
     Bitmap fire1, fire2, fire3, character1, character2, character3, deadCharacter;
     public static int character_color = 0;
-    private final GameView gameView;
+
 
     //grabs main character from drawable, main character, firing character && dead character
-    GameCharacter(GameView gameView, int screenY, Resources res)   {
-        this.gameView = gameView;
+    GameCharacter(int screenY, Resources res)   {
 
         fire1 = BitmapFactory.decodeResource(res, R.drawable.fire);
         fire2 = BitmapFactory.decodeResource(res, R.drawable.fire2);
@@ -75,7 +78,7 @@ public class GameCharacter {
 
             fireCount = 1;
             fire = 0;
-            gameView.newPellet();
+            GameView.getInstance().newPellet();
 
             return fire3;
         }
