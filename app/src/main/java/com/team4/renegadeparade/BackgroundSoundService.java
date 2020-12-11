@@ -22,6 +22,7 @@ public class BackgroundSoundService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
+    // onCreate sets up mediaPlayer object, sets volume, and loops music
     @Override
     public void onCreate() {
         super.onCreate();
@@ -29,6 +30,8 @@ public class BackgroundSoundService extends Service {
             mediaPlayer.setLooping(true); // Set looping
             mediaPlayer.setVolume(50, 50);
     }
+
+    //method call for buttons
     public int onStartCommand(Intent intent, int flags, int startId) {
         mediaPlayer.start();
         return startId;
@@ -36,6 +39,7 @@ public class BackgroundSoundService extends Service {
     public void onStart(Intent intent, int startId) {
 
     }
+    // stops and releases the mediaplayer object when app is closed
     @Override
     public void onDestroy() {
 

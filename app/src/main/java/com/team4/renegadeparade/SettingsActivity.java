@@ -48,15 +48,19 @@ public class SettingsActivity extends AppCompatActivity {
         unmute = findViewById(R.id.unmute);
         unmute.setOnClickListener(v -> unmuteMusic());
 
+        //red button
         red = findViewById(R.id.red_character);
         red.setOnClickListener(v -> redCharacter());
 
+        //blue button
         blue = findViewById(R.id.blue_character);
         blue.setOnClickListener(v -> blueCharacter());
 
+        //green button
         green = findViewById(R.id.green_character);
         green.setOnClickListener(v -> greenCharacter());
 
+        //default character
         defaultColor = findViewById(R.id.default_color);
         defaultColor.setOnClickListener(v -> defaultCharacter());
 
@@ -88,14 +92,14 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     }
-
+    // changes color values when blue button is pressed
     private void blueCharacter()
     {
 
         GameCharacter.character_color = Color.argb(255,0,0,255);
 
     }
-
+    // changes color values when green button is pressed
     private void greenCharacter()
     {
 
@@ -103,7 +107,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
-
+    // changes color values when green button is pressed
     private void redCharacter()
     {
 
@@ -111,7 +115,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
+    // reverts character color to default values
     private void defaultCharacter()
+
     {
         GameCharacter.character_color = 0;
     }
